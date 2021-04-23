@@ -1,0 +1,88 @@
+/* --------------------------------------------------- USER $_SESSION PROFILE  */
+
+
+/*  ----------------------- PROFIL */
+
+.profilDetails {
+    position: absolute;
+    top: 150%;
+    right: 0;
+    width: 15vw;
+    padding: 5%;
+    transform: translateX(300%);
+    opacity: 0;
+    transition: transform .3s ease-in;
+    z-index: 10000;
+}
+
+.profilDetails.active {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.profilCard {
+    border-radius: 10px;
+    text-align: center;
+    padding: 5%;
+}
+
+.avatarContainer img {
+    border-radius: 100%;
+    padding: 2%;
+}
+
+.helpers .avatarContainer img,
+.profilCard .avatarContainer img {
+    width: 100px;
+    height: 100px;
+}
+
+.profilCard .header,
+.profilCard .body {
+    padding: 5% 0;
+    border-bottom: 1px solid #4444;
+}
+
+.profilDetails h4 {
+    font-size: 1.3rem;
+    color: var(--dark-blue);
+}
+
+.profilDetails a {
+    width: 50%;
+    margin: 5% auto;
+}
+
+
+/*  ----------------------- ALL USER */
+
+.helpers .allUsers {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.helpers .profilCard {
+    width: 300px;
+    margin: 2%;
+    padding: 2%;
+}
+
+.rang {
+    margin: 5% 0;
+}
+
+.adminBtnContainer {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 5%;
+    margin-top: 5%;
+}
+
+.adminBtnContainer button,
+.adminBtnContainer a {
+    color: red;
+    border: 1px solid red;
+    width: 100px;
+}

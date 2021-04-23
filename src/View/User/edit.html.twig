@@ -1,0 +1,17 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="wrapper edit">
+        <div class="leftSide">
+            <h1>Modifier </h1>
+            <div class="outerContainer">
+                <div class="innerContainer">
+                    <img class="avatar" src="/assets/images/membres/avatars/{{user.avatar}}" alt="plan de strasbourg"/>
+                </div>
+            </div>
+        </div>
+        
+        {% include 'User/_form.html.twig' %}
+    </div>
+    
+{% endblock %}

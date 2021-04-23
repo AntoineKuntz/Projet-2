@@ -1,0 +1,42 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="wrapper userShow">
+        <div class="rightContainer">
+            <h1>{{ user.lastname }} {{ user.firstname }}</h1>
+            
+            <div class="avatarCont">
+                <img src="/assets/images/membres/avatars/{{user.avatar}}"/>
+            </div>
+
+            <div>
+                <h4>Rang : <span>{{ user.rang }}</span></h4>
+                <div>
+                    <h4>Localité : </h4>
+                    <p> {{user.adresseStreet}}</p>
+                    <p> {{ user.adressePostal}} {{user.adresseCity}} </P>
+                </div>
+                
+                <div>
+                    <h4>Contact :</h4>
+                    {{ user.mail }} 
+                </div>
+            <p>  </p>
+            <p><img class="jeton" src="/assets/images/img/jeton1.png"> X {{ user.badge }} </p>
+            </div> 
+            {% if session.user.id == user.id %}
+                <a href="/user/edit/{{ session.user.id }}">Modifier</a>
+            {% endif %}
+        </div>
+       
+        <div class="leftContainer">        
+           
+           <!--ANONCES USER-->
+    
+        </div>
+       
+    <div>
+
+   
+
+{% endblock %}

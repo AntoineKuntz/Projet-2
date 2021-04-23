@@ -1,0 +1,48 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+   
+    <div class="wrapper helpers">
+        
+        <h1>Nos Helpers</h1>
+
+        <div class="allUsers">
+            {% for key in user %}
+            
+                {% if key.id != session.user.id %}
+                    
+                        <div class="profilCard">
+                            
+                            <div class="header">
+                                <div class="avatarContainer">
+                                    <img class="usersAvatar" src="/assets/images/membres/avatars/{{key.avatar}}">
+                                </div>
+                               <h4>{{ key.lastname }} {{ key.firstname }}</h4> 
+                            </div>
+                            
+                            <div class="body">     
+                                <div class="adress">
+                                    <p class="fontLight"> {{ key.adresseNumber}} {{key.adresseStreet}}</p>
+                                    <p class="fontLight"> {{ key.adressePostal}} {{key.adresseCity}} </P>
+                                </div>
+                                
+                                <p class="rang"> Rang : {{ key.rang }} </p>
+                            </div>
+                            
+                            <a href="userShow/{{ key.id }}">Voir les annonces</a>
+                            {% if session.user.status == '1' %}
+                                <div class="adminBtnContainer">
+                                    <a href="/user/edit/{{ key.id }}">Edit</a>
+                                    <form action="/user/delete/{{key.id}}" method="POST">
+                                        <button>Delete</button>
+                                    </form>
+                                </div>
+                            {% endif %}
+                        </div>
+                    
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

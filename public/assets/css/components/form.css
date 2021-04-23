@@ -1,0 +1,147 @@
+/* -------------------------------------LOGIN */
+
+.login {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.login form {
+    max-width: 50%;
+}
+
+
+/* INPUT */
+
+input {
+    margin: 1%;
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+}
+
+input:not([type=submit], [type=file]):focus {
+    background: #efefef;
+}
+
+input[type=submit] {
+    color: #62B2C8;
+    box-shadow: 2px 4px 6px #989899, -5px -3px 4px #ffffff, -3px -2px 0px #ffffff;
+}
+
+a.link {
+    font-size: .8rem;
+    padding: 5px 10px;
+}
+
+img.cath,
+img.draw {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+}
+
+.cath {
+    height: 100vh;
+}
+
+.draw {
+    width: 100vw;
+    filter: invert(80%) sepia(0%) saturate(126%) hue-rotate(17deg) brightness(84%) contrast(108%);
+}
+
+
+/* -------------------------------------SIGN IN */
+
+.signIn {
+    max-height: 90vh;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.signIn h1 {
+    padding-top: 5%;
+    align-self: flex-start;
+}
+
+.signIn h1::after {
+    width: 100%;
+    background-color: var(--light-blue);
+}
+
+fieldset,
+.formLink {
+    padding: 2% 1%;
+    text-align: center;
+    background: #efefef;
+    border: 1px solid rgba(243, 198, 165);
+}
+
+legend {
+    color: var(--dark-blue);
+}
+
+label {
+    font-size: .7rem;
+}
+
+.errors {
+    height: 1.3rem;
+    color: red;
+    font-size: .7rem;
+}
+
+.formLink {
+    display: flex;
+    justify-content: space-between;
+    margin: 5% 0;
+}
+
+
+/* -------------------------------------EDIT */
+
+.edit {
+    display: flex;
+    justify-content: space-around;
+}
+
+.leftSide {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.edit .outerContainer {
+    position: relative;
+    width: 25vw;
+    height: 25vw;
+    margin-top: 20%;
+}
+
+.edit .innerContainer {
+    position: relative;
+    padding: 10px;
+    width: 25vw;
+    height: 25vw;
+    padding: 1%;
+}
+
+.edit .outerContainer,
+.edit .innerContainer,
+.edit .avatar {
+    border-radius: 100%;
+}
+
+.edit .avatar {
+    position: absolute;
+    padding: 10px;
+    width: 90%;
+    height: 90%;
+    top: 5%;
+    left: 5%;
+}
