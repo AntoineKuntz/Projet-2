@@ -1,0 +1,13 @@
+
+
+    
+<form method="post">
+	<input type="hidden" value="{{ advert.id }}" name="id" >
+     <label for="title">type your title :</label></br>
+	<input type="text" value="{{ advert.title }}" name="title" ></br>
+     <label for="description">type your description :</label></br>
+    <input type="text" value="{{ advert.description }}" name="description" ></br>
+     <label for="comment">explain your offer :</label></br>
+    <textarea value="{{ advert.comment }}" name="comment" ></textarea></br>
+	<input type="submit" value="Valider">
+</form>

@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <h1> {{ advert.title }}</h1>
+    <p> {{ advert.description }}</p>
+    <p>  {{ advert.comment }} </p>
+
+    <a href="/Advert/edit/{{ advert.id }}">Edit</a>
+    <form action="/Advert/delete/{{advert.id}}" method="POST">
+        <button>Delete</button>
+    </form>
+
+    <a href="/Advert/index">Back</a>
+    
+{% endblock %}
