@@ -10,13 +10,16 @@ class AdvertManager extends AbstractManager
 
     public function insert(array $advert): int
     {
-        $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " (user_id, title, category_id, description, disponibility) VALUES (:user_id, :title, :category_id, :description, :disponibility)");
+        $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " 
+        (user_id, title, category_id, description, disponibility)
+        VALUES 
+        (:user_id, :title, :category_id, :description, :disponibility)");
         $statement->bindValue('user_id', $advert['user_id'], \PDO::PARAM_INT);
         $statement->bindValue('title', $advert['title'], \PDO::PARAM_STR);
         $statement->bindValue('category_id', $advert['category_id'], \PDO::PARAM_INT);
         $statement->bindValue('description', $advert['description'], \PDO::PARAM_STR);
         $statement->bindValue('disponibility', $advert['disponibility'], \PDO::PARAM_STR);
-        
+
         $statement->execute();
         return (int)$this->pdo->lastInsertId();
     }
@@ -25,7 +28,14 @@ class AdvertManager extends AbstractManager
 
     public function update(array $advert): bool
     {
-        $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET `user_id`= :user_id, `title`= :title ,`category_id`= :category_id, `description` = :description ,`disponibility` = :disponibility WHERE id=:id");
+        $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " 
+        SET 
+        `user_id`= :user_id,
+        `title`= :title ,
+        `category_id`= :category_id,
+        `description` = :description ,
+        `disponibility` = :disponibility
+         WHERE id=:id");
         $statement->bindValue('user_id', $advert['user_id'], \PDO::PARAM_INT);
         $statement->bindValue('id', $advert['id'], \PDO::PARAM_INT);
         $statement->bindValue('title', $advert['title'], \PDO::PARAM_STR);

@@ -12,14 +12,13 @@ class UserController extends AbstractController
     /**
     * secure form
     */
-   public function validData($data)
-   {
-           $data = trim($data);
-           $data = stripslashes($data);
-           $data = htmlspecialchars($data);
-
-           return $data;
-   }
+    public function validData($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
 
     public function checkUserForm(): array
     {
@@ -98,7 +97,6 @@ class UserController extends AbstractController
      */
     public function add(): string
     {
-        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // clean $_POST data
             $userDatas = array_map(array($this, "validData"), $_POST);
@@ -140,25 +138,24 @@ class UserController extends AbstractController
     {
         $userManager = new UserManager();
         $user = $userManager->selectOneById($id);
- 
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // clean $_POST data
             $user = array_map('trim', $_POST);
-            
             // if validation is ok, update and redirection
             if (count($this->checkUserForm()) == 0) {
                 if (!isset($user['avatar'])) {
                     $user['avatar'] = $userManager->selectOneById($id)['avatar'];
-                }else{
+                } else {
                     $user = $this->uploadAvatar($user);
                 }
-                
+
                 $userManager->update($user);
                 header('Location: /user/userShow/' . $id);
-            }else {
+            } else {
                 if (!isset($user['avatar'])) {
                     $user['avatar'] = $userManager->selectOneById($id)['avatar'];
-                }else{
+                } else {
                     $user = $this->uploadAvatar($user);
                 }
                 return $this->twig->render('User/edit.html.twig', [

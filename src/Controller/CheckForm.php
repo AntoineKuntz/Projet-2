@@ -7,11 +7,10 @@ use App\Model\AuthManager;
 
 class CheckForm extends AbstractController
 {
-
     /**
      * Check all errors
      */
-    
+
     public function checkEmptyErrors()
     {
         $errors = array();
@@ -117,5 +116,4 @@ class CheckForm extends AbstractController
 
         return $errors;
     }
-
 }

@@ -2,7 +2,6 @@
 
 namespace App\Model;
 
-
 class ReviewManager extends AbstractManager
 {
     /**
