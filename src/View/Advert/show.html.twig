@@ -1,0 +1,18 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <h1> {{ advert.title }}</h1>
+    <p> {{ advert.description }}</p>
+    <p>  {{ advert.comment }} </p>
+
+    {% if session.user.status == '1' or session.user.id == advert.user_id %}
+        <a href="/Advert/edit/{{ advert.id }}">Edit</a>
+    
+        <form action="/Advert/delete/{{advert.id}}" method="POST">
+            <button>Delete</button>
+        </form>
+    {% endif %}
+    <a href="/Advert/index">Back</a>
+    
+{% endblock %}

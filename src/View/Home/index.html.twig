@@ -4,4 +4,7 @@
 
         <h1>Hello {% if session %} {{session.user.userLastName}} {{session.user.userFirstName}}{% else %}Helper{% endif %} !</h1>
         
+        {% if session %}
+                <a href="/review/add">Commenter</a>
+        {% endif %}
 {% endblock %}

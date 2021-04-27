@@ -1,0 +1,25 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+ 
+<h1>Les annonces disponibles :</h1>
+
+    <form method="post" action="">
+        <fieldset>
+            <legend>
+                Rechercher :
+            </legend>
+        </fieldset>
+    </form>
+
+    <ul>       
+        {% for key in advert %}
+            {% if session.user.id != key.user_id %}
+                <li><a href="/Advert/show/{{ key.id }}"> {{ key.title }}</a></li>
+                <p> {{key.description}} </p>
+            {% endif %}
+        {% else %}
+            <li>Aucune annonce disponible !</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

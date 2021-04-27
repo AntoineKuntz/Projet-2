@@ -1,10 +1,11 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
+
     <div class="wrapper userShow">
         <div class="rightContainer">
             <h1>{{ user.lastname }} {{ user.firstname }}</h1>
-            
+
             <div class="avatarCont">
                 <img src="/assets/images/membres/avatars/{{user.avatar}}"/>
             </div>
@@ -25,14 +26,24 @@
             <p><img class="jeton" src="/assets/images/img/jeton1.png"> X {{ user.badge }} </p>
             </div> 
             {% if session.user.id == user.id %}
-                <a href="/user/edit/{{ session.user.id }}">Modifier</a>
+                <a href="/user/edit/{{ session.user.id }}">Modifier Profil</a>
+                <a href="/Advert/add">Ajoute une annonce</a>
             {% endif %}
         </div>
        
         <div class="leftContainer">        
-           
-           <!--ANONCES USER-->
-    
+
+            {% for key in advert %} 
+                    <div>
+                        <a href="/Advert/show/{{ key.id }}"> {{ key.title }}</a>
+                        <p> {{key.description}} </p>
+                    </div>
+            {% endfor %}
+
+            {% if advert is empty %}
+                <p>Acunne annonce disponible.</p>
+            {% endif %}   
+            
         </div>
        
     <div>
