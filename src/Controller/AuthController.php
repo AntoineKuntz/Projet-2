@@ -17,8 +17,8 @@ class AuthController extends AbstractController
             if ($_POST['mail']) {
                 if ($user && password_verify($password, $user['password'])) {
                     $_SESSION['user']['id'] = $user['id'];
-                    $_SESSION['user']['userLastName'] = $user['lastname'];
-                    $_SESSION['user']['userFirstName'] = $user['firstname'];
+                    $_SESSION['user']['userLastName'] = $user['lastName'];
+                    $_SESSION['user']['userFirstName'] = $user['firstName'];
                     $_SESSION['user']['status'] = $user['isAdmin'];
                     $_SESSION['user']['avatar'] = $user['avatar'];
                     $_SESSION['user']['mail'] = $user['mail'];
@@ -26,7 +26,7 @@ class AuthController extends AbstractController
                     $_SESSION['user']['badge'] = $user['badge'];
 
                     header('Location: /');
-                }else{
+                } else {
                     return 'Mail ou mot de passe incorrect';
                 }
             }

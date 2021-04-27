@@ -6,8 +6,8 @@
             
             <input type="hidden" value="{{ user.id }}" name="id">
             <div>
-                <input type="text" value="{{ user.lastname }}" name="lastName" placeholder="Nom" pattern="[A-Za-z '-]+$" maxlength="50" >
-                <input type="text" value="{{ user.firstname }}" name="firstName" placeholder="Prénom" pattern="[A-Za-z '-]+$" maxlength="50">    
+                <input type="text" value="{{ user.lastName }}" name="lastName" placeholder="Nom" pattern="[A-Za-z '-]+$" maxlength="50" >
+                <input type="text" value="{{ user.firstName }}" name="firstName" placeholder="Prénom" pattern="[A-Za-z '-]+$" maxlength="50">    
                 <p class="errors"> {{errors.firstName1}}  {{ errors.lastName1 }}</p>
             </div>
             
