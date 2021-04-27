@@ -1,0 +1,14 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>catégorie</h1>
+    <a href="/category/add">Ajouter une catégorie</a> <br> <br>
+    {% for category in categories %}
+        <li>Nom Catégorie : {{ category.name }}<a href="/category/edit/{{ category.id }}">Editer votre catégorie</a>
+        <form action="/category/delete/{{ category.id }}" method="POST">
+            <button>Supprimer</button>
+        </form>
+        </li><br>
+
+    {% endfor %}
+{% endblock %}
