@@ -140,7 +140,6 @@ class UserController extends AbstractController
             $user = array_map('trim', $_POST);
             // if validation is ok, update and redirection
             if (count($this->checkUserForm()) == 0) {
-
                 if (!isset($_FILES['avatar']) || $_FILES['avatar']['size'] === 0) {
                     $user['avatar'] = $userManager->selectOneById($id)['avatar'];
                 } else {
