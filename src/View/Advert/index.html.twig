@@ -1,0 +1,17 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+ 
+<h1>Les annonces disponibles :</h1>
+    <ul>
+        
+        {% for key in advert %}
+            <li><a href="/Advert/show/{{ key.id }}"> {{ key.title }}</a></li>
+            <p> {{key.description}} </p>
+        {% else %}
+            <li>Aucune annonce disponible !</li>
+        {% endfor %}
+    </ul>
+    <a href="/Advert/add">Ajoute une annonce</a>
+
+{% endblock %}
