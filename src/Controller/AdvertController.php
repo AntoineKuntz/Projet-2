@@ -1,11 +1,8 @@
 <?php
 
-// Controlleur du crud Annonce.
-
 namespace App\Controller;
 
 use App\Model\AdvertManager;
-
 use App\Model\UserManager;
 use App\Controller\CheckForm;
 
@@ -102,7 +99,6 @@ class AdvertController extends AbstractController
                     'advert' => $advertDatas,
                     'errors' => $this->checkAdvertForm()
                 ]);
-
             }
         }
         return $this->twig->render('Advert/add.html.twig');
@@ -140,7 +136,6 @@ class AdvertController extends AbstractController
             $advertManager = new AdvertManager();
             $advertManager->delete($id);
             header('Location:/user/userShow/' . $_SESSION['user']['id']);
-
         }
     }
 }

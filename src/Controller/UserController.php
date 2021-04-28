@@ -3,10 +3,7 @@
 namespace App\Controller;
 
 use App\Model\UserManager;
-<<<<<<< HEAD
 use App\Model\AdvertManager;
-=======
->>>>>>> 735aa96326dd07637d9f08866bbb1c17df5e296a
 use App\Controller\CheckForm;
 use App\Controller\AuthController;
 
@@ -90,12 +87,8 @@ class UserController extends AbstractController
         $advert = $advertManager->selectByUserId($id);
 
         return $this->twig->render('User/userShow.html.twig', [
-<<<<<<< HEAD
             'user' => $user,
             'advert' => $advert
-=======
-            'user' => $user
->>>>>>> 735aa96326dd07637d9f08866bbb1c17df5e296a
             ]);
     }
 
@@ -151,11 +144,7 @@ class UserController extends AbstractController
             $user = array_map('trim', $_POST);
             // if validation is ok, update and redirection
             if (count($this->checkUserForm()) == 0) {
-<<<<<<< HEAD
                 if (!isset($user['avatar'])) {
-=======
-                if (!isset($_FILES['avatar']) || $_FILES['avatar']['size'] === 0) {
->>>>>>> 735aa96326dd07637d9f08866bbb1c17df5e296a
                     $user['avatar'] = $userManager->selectOneById($id)['avatar'];
                 } else {
                     $user = $this->uploadAvatar($user);
