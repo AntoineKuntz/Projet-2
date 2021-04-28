@@ -29,15 +29,17 @@
                                 <p class="rang"> Rang : {{ key.rang }} </p>
                             </div>
                             
-                            <a href="userShow/{{ key.id }}">Voir les annonces</a>
-                            {% if session.user.status == '1' %}
-                                <div class="adminBtnContainer">
-                                    <a href="/user/edit/{{ key.id }}">Edit</a>
-                                    <form action="/user/delete/{{key.id}}" method="POST">
-                                        <button>Delete</button>
-                                    </form>
-                                </div>
-                            {% endif %}
+                            <div class="footer">
+                                <a href="userShow/{{ key.id }}" class="btn">Profil</a>
+                                {% if session.user.status == '1' %}
+                                    <div class="adminBtnContainer">
+                                        <a href="/user/edit/{{ key.id }}">Edit</a>
+                                        <form action="/user/delete/{{key.id}}" method="POST">
+                                            <button>Delete</button>
+                                        </form>
+                                    </div>
+                                {% endif %}
+                            </div>
                         </div>
                     
                 {% endif %}

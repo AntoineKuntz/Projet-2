@@ -1,25 +1,27 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
- 
-<h1>Les annonces disponibles :</h1>
+     <div class="wrapper allAdvert">
 
-    <form method="post" action="">
-        <fieldset>
-            <legend>
-                Rechercher :
-            </legend>
-        </fieldset>
-    </form>
+        <h1>Les Helps :</h1>
 
-    <ul>       
-        {% for key in advert %}
-            {% if session.user.id != key.user_id %}
-                <li><a href="/Advert/show/{{ key.id }}"> {{ key.title }}</a></li>
-                <p> {{key.description}} </p>
-            {% endif %}
-        {% else %}
-            <li>Aucune annonce disponible !</li>
-        {% endfor %}
-    </ul>
+        {% include 'Advert/_formFilters.html.twig' %}
+
+            {% for key in advert %}
+                {% if session.user.id != key.user_id %}
+                    
+                    <div>
+                        <h2><a href="/Advert/show/{{ key.id }}"> {{ key.title }} -- </a><span>{{ key.category_id }}</span></h2>
+                        
+                        {% for ref in user %}{% if ref.id == key.user_id %} <p>{{ ref.lastName }} {{ ref.firstName }}</p> {% endif %} {% endfor %}
+                        
+                        <p> {{key.description}} </p>
+
+                    </div>
+                {% endif %}
+            {% else %}
+                <p>Aucune annonce disponible !</p>
+            {% endfor %}
+    </div>
+
 {% endblock %}

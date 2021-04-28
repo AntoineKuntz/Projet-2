@@ -5,13 +5,35 @@
 namespace App\Controller;
 
 use App\Model\AdvertManager;
+use App\Model\UserManager;
 use App\Controller\CheckForm;
 
 class AdvertController extends AbstractController
 {
 
-    //check les erreurs du form
+    //Filtres de recherche
+    public function filterAdvert()
+    {
+        $advertManager = new AdvertManager();
+        $userManager = new UserManager();
+        $filteredAdvert = array();
 
+        if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+            
+            if(isset($_POST['category']) && $_POST['category'] !== "") {
+                $filteredAdvert = $advertManager->selectByCategoryId($_POST['category']);
+            }
+
+            if(isset($_POST['search']) && $_POST['search'] !== "") {
+                $term = htmlspecialchars($_POST['search']);
+                $filteredAdvert = $userManager->searchByUser($term);
+            }
+        }
+
+        return $filteredAdvert;
+    }
+
+    //check les erreurs du form
     public function checkAdvertForm()
     {
         $checkForm = new CheckForm();
@@ -23,27 +45,42 @@ class AdvertController extends AbstractController
         return $errors;
     }
 
-// liste les annonces disponibles
+    // liste les annonces disponibles
 
     public function index()
     {
         $advertManager = new AdvertManager();
-        $advert = $advertManager->selectAll('title');
+        $userManager = new UserManager();
+        $advert = $advertManager->selectAll();
+    
+        if (count($this->filterAdvert()) > 0) {
+            return $this->twig->render('Advert/index.html.twig', [
+                'advert' => $this->filterAdvert(),
+
+                ]);
+        }
         if (!isset($_SESSION['user'])) {
             header('Location:../auth/logIn');
         } else {
-            return $this->twig->render('Advert/index.html.twig', ['advert' => $advert]);
-        }
+            return $this->twig->render('Advert/index.html.twig', [
+                'advert' => $advert,
+                'user' => $userManager->selectAll()
+                ]);
+        }    
     }
 
-// montre les informations disponibles pour une annonces spécifiques
+    // montre les informations disponibles pour une annonces spécifiques
 
     public function show(int $id): string
     {
         $advertManager = new AdvertManager();
+        $userManager = new UserManager();
         $advert = $advertManager->selectOneById($id);
-
-        return $this->twig->render('Advert/show.html.twig', ['advert' => $advert]);
+        
+        return $this->twig->render('Advert/show.html.twig', [
+            'advert' => $advert,
+            'user' => $userManager->selectOneById($advert['user_id'])
+            ]);
     }
 
 // Ajouter une nouvelle annonce via un form

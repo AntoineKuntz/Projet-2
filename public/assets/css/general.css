@@ -131,7 +131,9 @@ nav ul,
 nav ul li:active,
 .btnProfil:active,
 .profilDetails a:active,
-.profilCard,
+
+/*.profilCard,*/
+
 input:not([type=submit], [type=file]):focus,
 input[type=submit]:active,
 input[type=file],
