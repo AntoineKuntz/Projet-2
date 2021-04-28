@@ -18,13 +18,12 @@ class AdvertController extends AbstractController
         $userManager = new UserManager();
         $filteredAdvert = array();
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-            
-            if(isset($_POST['category']) && $_POST['category'] !== "") {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST['category']) && $_POST['category'] !== "") {
                 $filteredAdvert = $advertManager->selectByCategoryId($_POST['category']);
             }
 
-            if(isset($_POST['search']) && $_POST['search'] !== "") {
+            if (isset($_POST['search']) && $_POST['search'] !== "") {
                 $term = htmlspecialchars($_POST['search']);
                 $filteredAdvert = $userManager->searchByUser($term);
             }
@@ -52,7 +51,7 @@ class AdvertController extends AbstractController
         $advertManager = new AdvertManager();
         $userManager = new UserManager();
         $advert = $advertManager->selectAll();
-    
+
         if (count($this->filterAdvert()) > 0) {
             return $this->twig->render('Advert/index.html.twig', [
                 'advert' => $this->filterAdvert(),
@@ -66,7 +65,7 @@ class AdvertController extends AbstractController
                 'advert' => $advert,
                 'user' => $userManager->selectAll()
                 ]);
-        }    
+        }
     }
 
     // montre les informations disponibles pour une annonces spécifiques
@@ -76,7 +75,7 @@ class AdvertController extends AbstractController
         $advertManager = new AdvertManager();
         $userManager = new UserManager();
         $advert = $advertManager->selectOneById($id);
-        
+
         return $this->twig->render('Advert/show.html.twig', [
             'advert' => $advert,
             'user' => $userManager->selectOneById($advert['user_id'])

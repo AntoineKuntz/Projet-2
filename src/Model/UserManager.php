@@ -64,11 +64,12 @@ class UserManager extends AbstractManager
 
     public function searchByUser(string $term): array
     {
-       $statement = $this->pdo->prepare("SELECT * FROM ". static::TABLE . " JOIN advert ON user.id = advert.user_id WHERE lastName LIKE '%" . $term . "%'");
+        $statement = $this->pdo->prepare("SELECT * FROM " . static::TABLE .
+        " JOIN advert ON user.id = advert.user_id WHERE lastName LIKE '%" . $term . "%'");
 
-       $statement->bindValue('term', $term, \PDO::PARAM_STR);
-       $statement->execute();
+        $statement->bindValue('term', $term, \PDO::PARAM_STR);
+        $statement->execute();
 
-       return $statement->fetchAll();
+        return $statement->fetchAll();
     }
 }

@@ -56,7 +56,7 @@ class AdvertManager extends AbstractManager
         return $statement->fetchAll();
     }
 
-    public function selectByCategoryId(int $id):array
+    public function selectByCategoryId(int $id): array
     {
         $statement = $this->pdo->prepare("SELECT * FROM " . static::TABLE . " WHERE category_id=:category_id");
         $statement->bindValue('category_id', $id, \PDO::PARAM_INT);
@@ -64,5 +64,4 @@ class AdvertManager extends AbstractManager
 
         return $statement->fetchAll();
     }
-
 }
