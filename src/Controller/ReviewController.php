@@ -42,16 +42,14 @@ class ReviewController extends AbstractController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $reviewDatas = array_map(array($this, "validData"), $_POST);
-            
+
             if (!isset($_POST['date'])) {
                 $reviewDatas['date'] = date('Y , m , H:i:s');
             }
             if (count($this->checkReviewForm()) == 0) {
                 $reviewManager = new ReviewManager();
-                var_dump($reviewDatas);die();
                 $reviewManager->insert($reviewDatas);
             } else {
-              // var_dump($this->checkReviewForm()); die();
                 return $this->twig->render('Review/add.html.twig', [
                   'review' => $reviewDatas,
                   'errors' => $this->checkReviewForm()
