@@ -5,6 +5,7 @@
 namespace App\Controller;
 
 use App\Model\AdvertManager;
+
 use App\Model\UserManager;
 use App\Controller\CheckForm;
 
@@ -49,6 +50,7 @@ class AdvertController extends AbstractController
     public function index()
     {
         $advertManager = new AdvertManager();
+
         $userManager = new UserManager();
         $advert = $advertManager->selectAll();
 
@@ -82,6 +84,7 @@ class AdvertController extends AbstractController
             ]);
     }
 
+
 // Ajouter une nouvelle annonce via un form
 
     public function add(): string
@@ -99,12 +102,14 @@ class AdvertController extends AbstractController
                     'advert' => $advertDatas,
                     'errors' => $this->checkAdvertForm()
                 ]);
+
             }
         }
         return $this->twig->render('Advert/add.html.twig');
     }
 
 // modiffication des annonces existantes
+
 
     public function edit(int $id): string
     {
@@ -135,6 +140,7 @@ class AdvertController extends AbstractController
             $advertManager = new AdvertManager();
             $advertManager->delete($id);
             header('Location:/user/userShow/' . $_SESSION['user']['id']);
+
         }
     }
 }

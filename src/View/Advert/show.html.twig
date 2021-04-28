@@ -1,6 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
+
     <div class="wrapper advert">
         <h1> {{ advert.title }}</h1>
         <h2><a href="/user/userShow/{{ user.id }}" >by {{user.lastName}} {{user.firstName}}</a></h2>
@@ -18,5 +19,6 @@
         
         <a href="/Advert/index">Back</a>
     </div>
+
     
 {% endblock %}

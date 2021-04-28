@@ -35,6 +35,7 @@ class CheckForm extends AbstractController
             'adressePostal1' => " - Veuillez rentrer une adresse valide",
             'adresseCity1' => " - Veuillez rentrer une adresse valide",
             'mail1' => " - Veuillez saisir une adresse mail",
+<<<<<<< HEAD
             'password1' => " - Entrez un mot de passe",
             'rate1' => "La note doit être d'une étoile minimum",
             'comment1' => "Laisez un commentaire pour votre helper",
@@ -43,6 +44,9 @@ class CheckForm extends AbstractController
             'description1' => 'Décrivez en quelque mots votre annonce s\'il vous plait. ',
             'disponibility1' => 'merci de rajouter vos disponibilitées.',
             'category_id1' => 'Veuillez selectionner une catégorie'
+=======
+            'password1' => " - Entrez un mot de passe"
+>>>>>>> 735aa96326dd07637d9f08866bbb1c17df5e296a
         ];
 
         $error = $this->checkEmptyErrors();
