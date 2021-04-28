@@ -1,0 +1,26 @@
+<aside class="profilDetails">      
+    
+    <div class="profilCard">    
+        
+        <div class="header">
+            <div class="avatarContainer">
+                <img class="usersAvatar" src="/assets/images/membres/avatars/{{session.user.avatar}}">
+            </div>
+            <h4>{{ session.user.userLastName }} {{ session.user.userFirstName }}</h4>
+            <p class="fontLight">{{ session.user.mail }} </p>
+        </div>
+        
+        <div class="body">            
+            <p class="rang">Rang {{ session.user.rang }} </p>
+            <p class="badge">badge : {{ session.user.badge }} </p> 
+        </div>
+        
+        <div class="footer">
+            <a href="/user/userShow/{{ session.user.id }}">Plus</a>
+        </div>
+   
+    </div>
+
+</aside>         
+       
+       

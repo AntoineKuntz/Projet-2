@@ -1,0 +1,148 @@
+:root {
+    --main-font: 'Economica', 'Advent Pro', 'Barlow', 'Josefin Sans', 'M PLUS Rounded 1c', 'Montserrat', 'Montserrat Alternates', 'Roboto';
+    --dark-blue: #367FAE;
+    --light-blue: #62B2C8;
+    --salmon: #F3C6A5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 24px;
+    font-family: var(--main-font);
+    color: #444;
+}
+
+body {
+    background-color: #efefef;
+    min-height: 100vh;
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    display: block;
+    text-decoration: none;
+    color: var(--light-blue);
+}
+
+img {
+    max-width: 100%;
+}
+
+h1 {
+    position: relative;
+    font-size: 5rem;
+    padding-bottom: 5%;
+}
+
+h1::after {
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: 0;
+    width: 40%;
+    height: 5px;
+    background-color: var(--salmon);
+}
+
+
+/* --------------------------------------------------- CLASS */
+
+
+/* only visible under 800px*/
+
+.mobile {
+    display: none;
+}
+
+
+/* WRAPPE and center PAGE*/
+
+.wrapper {
+    width: 80vw;
+    margin: 0 auto;
+}
+
+
+/* Relief text */
+
+h1 {
+    text-shadow: 3px 3px 0px rgb(189, 189, 189), -3px -3px 0px rgb(255, 255, 255);
+}
+
+
+/* Relief BTN */
+
+.nav,
+nav ul li,
+.profilDetails,
+.btnProfil,
+.avatarContainer img,
+.profilDetails span,
+.profilDetails a,
+input:not([type=submit], [type=file]) {
+    box-shadow: 2px 2px 2px #bdbdbd, -2px -2px 2px #ffffff;
+    background: #efefef;
+}
+
+
+/* Relief plus prononcer */
+
+h1::after,
+.edit .outerContainer,
+fieldset,
+.edit .avatar {
+    box-shadow: 2px 5px 3px 0px #b8b8b8, -7px -3px 8px 3px #ffffff;
+}
+
+h1::after,
+.edit .outerContainer,
+.edit fieldset,
+.signIn fieldset {
+    margin: 3% 0;
+}
+
+
+/* RADIUS */
+
+.nav,
+nav ul,
+nav ul li,
+.profilDetails,
+.btnProfil,
+.avatarContainer img,
+.profilDetails span,
+.profilDetails a,
+.adminBtnContainer,
+input[type=submit] {
+    border-radius: 10px;
+}
+
+
+/* Relief creusé */
+
+nav ul,
+nav ul li:active,
+.btnProfil:active,
+.profilDetails a:active,
+.profilCard,
+input:not([type=submit], [type=file]):focus,
+input[type=submit]:active,
+input[type=file],
+.edit .innerContainer,
+.formLink {
+    box-shadow: inset 2px 2px 2px #bdbdbd, inset -2px -2px 2px #ffffff;
+}
+
+
+/* FONT_SIZE */
+
+.fontLight {
+    font-size: .8rem;
+}

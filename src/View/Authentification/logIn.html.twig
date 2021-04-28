@@ -1,0 +1,20 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <div class="login wrapper">
+        
+        <h1>Log-in</h1>
+        
+        <form method="post">
+            <input type="email" name="mail" placeholder="adresse@mail"/>&nbsp;
+            <input type="password" name="password" placeholder="Mot de passe"/> &nbsp;
+            <p class="errors">{{ errors }}</p>
+            <div class="logLink">
+                <input type="submit" value="Valider"/>
+                <a class="link" href="/user/add">Pas encore membres ?</a>
+            </div>
+        </form>      
+    <div>
+    <img class="cath" src="/assets/images/img/cath.svg" alt="cathédral de strasbourg"/>
+{% endblock %}

@@ -34,6 +34,7 @@ abstract class AbstractManager
     public function selectAll(string $orderBy = '', string $direction = 'ASC'): array
     {
         $query = 'SELECT * FROM ' . static::TABLE;
+
         if ($orderBy) {
             $query .= ' ORDER BY ' . $orderBy . ' ' . $direction;
         }
@@ -47,6 +48,7 @@ abstract class AbstractManager
      */
     public function selectOneById(int $id)
     {
+
         // prepared request
         $statement = $this->pdo->prepare("SELECT * FROM " . static::TABLE . " WHERE id=:id");
         $statement->bindValue('id', $id, \PDO::PARAM_INT);

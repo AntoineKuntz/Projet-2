@@ -1,0 +1,27 @@
+.userShow {
+    display: flex;
+}
+
+.rightContainer {
+    width: 35%;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid #4444;
+    text-align: center;
+    line-height: 2rem;
+}
+
+.userShow .avatarCont {
+    width: 50%;
+}
+
+.rightContainer h1 {
+    font-size: 2rem;
+}
+
+.jeton {
+    width: 30px;
+}
