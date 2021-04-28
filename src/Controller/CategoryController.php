@@ -26,8 +26,7 @@ class CategoryController extends AbstractController
             header('Location: /category/index');
         }
 
-        return $this->twig->render('Category/edit.html.twig',
-        ['category' => $category,]);
+        return $this->twig->render('Category/edit.html.twig', ['category' => $category,]);
     }
 
     public function add(): string
@@ -37,7 +36,7 @@ class CategoryController extends AbstractController
 
             $categoryManager = new CategoryManager();
             $id = $categoryManager->insert($category);
-            header('Location: /category/index');
+            header('Location: /category/index' . $id);
         }
         return $this->twig->render('Category/add.html.twig');
     }
