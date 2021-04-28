@@ -7,25 +7,23 @@ use App\Model\DisponibilityManager;
 class DisponibilityController extends AbstractController
 {
 
-    public function index (): string
+    public function index(): string
     {
         $disponibilityManager = new DisponibilityManager();
         $disponibilitys = $disponibilityManager->selectAll('timetable');
-        return $this->twig->render ('/Disponibility/index.html.twig', ['disponibilitys'=> $disponibilitys]);
+        return $this->twig->render('/Disponibility/index.html.twig', ['disponibilitys' => $disponibilitys]);
     }
 
-    public function edit (int $id): string
+    public function edit(int $id): string
     {
         $disponibilityManager = new DisponibilityManager();
         $disponibility = $disponibilityManager->SelectOneById($id);
-        
-        if ($_SERVER["REQUEST_METHOD"] === 'POST'){
-        
+        if ($_SERVER["REQUEST_METHOD"] === 'POST') {
             $disponibility = array_map('trim', $_POST);
             $disponibilityManager->update($disponibility);
-            header('Location:/Disponibility/index'); 
+            header('Location:/Disponibility/index');
         }
-        return $this->twig->render ('Disponibility/edit.html.twig', ['disponibility' => $disponibility]);
+        return $this->twig->render('Disponibility/edit.html.twig', ['disponibility' => $disponibility]);
     }
 
     public function add(): string
@@ -33,20 +31,18 @@ class DisponibilityController extends AbstractController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $disponibility = array_map('trim', $_POST);
             $disponibilityManager = new DisponibilityManager();
-            $id = $disponibilityManager->insert($disponibility);
+            $disponibilityManager->insert($disponibility);
             header('Location:/Disponibility/index');
         }
-        
         return $this->twig->render('Disponibility/add.html.twig');
     }
 
-    public function delete (int $id)
+    public function delete(int $id)
     {
-        if ($_SERVER["REQUEST_METHOD"] === 'POST'){
+        if ($_SERVER["REQUEST_METHOD"] === 'POST') {
             $disponibilityManager = new DisponibilityManager();
             $disponibilityManager->delete($id);
             header('Location:/Disponibility/index');
         }
     }
 }
-
