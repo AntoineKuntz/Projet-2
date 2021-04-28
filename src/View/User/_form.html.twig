@@ -17,7 +17,7 @@
                 <p class="errors"> {{errors.age1}} {{ errors.age2 }} </p>
             </div>
         </fieldset>  
-        
+
         <fieldset>
             <legend>Adresse : </legend>
                     
@@ -56,6 +56,8 @@
         <div class="formLink">
         {% if not user %}
             <a class="link" href="/auth/logIn">Déjàs membre ?</a>
+        {% elseif user.id == session.user.id %}
+            <a class="link" href="/user/userShow/{{user.id}}"> Back </a>
         {% endif %}
             <input type="submit" value="Valider">
         </div>

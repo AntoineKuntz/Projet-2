@@ -2,15 +2,23 @@
 
 {% block content %}
 
-    <h1> {{ advert.title }}</h1>
-    <p> {{ advert.description }}</p>
-    <p>  {{ advert.comment }} </p>
+    <div class="wrapper advert">
+        <h1> {{ advert.title }}</h1>
+        <h2><a href="/user/userShow/{{ user.id }}" >by {{user.lastName}} {{user.firstName}}</a></h2>
+        <p> {{ advert.description }}</p>
+        <p>  {{ advert.disponibility }} </p>
 
-    <a href="/Advert/edit/{{ advert.id }}">Edit</a>
-    <form action="/Advert/delete/{{advert.id}}" method="POST">
-        <button>Delete</button>
-    </form>
+        {% if session.user.status == '1' or session.user.id == advert.user_id %}
+            <a href="/Advert/edit/{{ advert.id }}">Edit</a>
+        
+            <form action="/Advert/delete/{{advert.id}}" method="POST">
+                <button>Delete</button>
+            </form>
+        
+        {% endif %}
+        
+        <a href="/Advert/index">Back</a>
+    </div>
 
-    <a href="/Advert/index">Back</a>
     
 {% endblock %}

@@ -35,8 +35,8 @@ a.link {
     padding: 5px 10px;
 }
 
-img.cath,
-img.draw {
+.cath,
+.draw {
     position: fixed;
     bottom: 0;
     right: 0;
@@ -47,9 +47,32 @@ img.draw {
     height: 100vh;
 }
 
+.cath path {
+    stroke-width: 10;
+    stroke-dasharray: 150575px;
+    stroke-dashoffset: 150575px;
+    animation: animSvg 5s ease forwards;
+}
+
 .draw {
     width: 100vw;
-    filter: invert(80%) sepia(0%) saturate(126%) hue-rotate(17deg) brightness(84%) contrast(108%);
+}
+
+.draw path {
+    fill: none;
+    stroke: black;
+    stroke-width: 5;
+    stroke-dasharray: 150575px;
+    stroke-dashoffset: 150575px;
+    animation: animSvg 5s ease forwards;
+}
+
+@keyframes animSvg {
+    to {
+        stroke-dashoffset: 0;
+        fill: #4444;
+        stroke: none;
+    }
 }
 
 

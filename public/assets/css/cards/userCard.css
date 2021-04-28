@@ -24,11 +24,18 @@
     border-radius: 10px;
     text-align: center;
     padding: 5%;
+    box-shadow: 6px 3px 14px 2px #4444;
+}
+
+.profilCard:hover .avatarContainer img {
+    transform: translateZ(70px);
+    box-shadow: 6px 6px 10px 1px #4444;
 }
 
 .avatarContainer img {
     border-radius: 100%;
     padding: 2%;
+    transition: all .2s ease-in;
 }
 
 .helpers .avatarContainer img,
@@ -40,7 +47,7 @@
 .profilCard .header,
 .profilCard .body {
     padding: 5% 0;
-    border-bottom: 1px solid #4444;
+    border-bottom: 1px solid var(--salmon);
 }
 
 .profilDetails h4 {
@@ -63,9 +70,24 @@
 }
 
 .helpers .profilCard {
-    width: 300px;
+    width: 25%;
+    min-width: 200px;
+    max-width: 250px;
     margin: 2%;
     padding: 2%;
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+    background-color: #231F3B;
+}
+
+.helpers .avatarContainer img {
+    padding: 0;
+    box-shadow: none;
+    border: 1px solid var(--salmon);
+}
+
+.helpers .profilCard .body p {
+    color: #f6f6f6;
 }
 
 .rang {
@@ -85,4 +107,14 @@
     color: red;
     border: 1px solid red;
     width: 100px;
+}
+
+.btn {
+    border: 1px solid var(--light-blue);
+    border-radius: 5px;
+    margin: 10px auto;
+}
+
+.profilCard:hover .btn {
+    transform: translateZ(100px);
 }

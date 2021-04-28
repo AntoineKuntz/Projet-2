@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Model\UserManager;
+use App\Model\AdvertManager;
 use App\Controller\CheckForm;
 use App\Controller\AuthController;
 
@@ -81,10 +82,13 @@ class UserController extends AbstractController
     public function userShow(int $id)
     {
         $userManager = new UserManager();
+        $advertManager = new AdvertManager();
         $user = $userManager->selectOneById($id);
+        $advert = $advertManager->selectByUserId($id);
 
         return $this->twig->render('User/userShow.html.twig', [
-            'user' => $user
+            'user' => $user,
+            'advert' => $advert
             ]);
     }
 
@@ -140,7 +144,7 @@ class UserController extends AbstractController
             $user = array_map('trim', $_POST);
             // if validation is ok, update and redirection
             if (count($this->checkUserForm()) == 0) {
-                if (!isset($_FILES['avatar']) || $_FILES['avatar']['size'] === 0) {
+                if (!isset($user['avatar'])) {
                     $user['avatar'] = $userManager->selectOneById($id)['avatar'];
                 } else {
                     $user = $this->uploadAvatar($user);

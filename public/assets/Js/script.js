@@ -14,3 +14,19 @@ let nav = document.querySelector('nav');
 document.addEventListener('click', ()=>{
     nav.classList.toggle('active');
 })
+
+
+// Rate widget
+
+let radios = document.querySelectorAll('input[type=radio][name="rate"]');
+let rating = document.querySelector('.rating');
+
+if(rating){
+    rating.addEventListener('change', (e)=>{
+    if(rating.querySelector('.active')){
+        rating.querySelector('.active').classList.remove('active');
+    }
+    e.target.classList.add('active');
+    })
+}
+
