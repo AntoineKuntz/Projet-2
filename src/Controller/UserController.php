@@ -88,7 +88,6 @@ class UserController extends AbstractController
         $user = $userManager->selectOneById($id);
         $advert = $advertManager->selectByUserId($id);
         $help = $helpManager->selectAllHelpByUser($id);
-        
 
         return $this->twig->render('User/userShow.html.twig', [
             'user' => $user,
@@ -145,7 +144,6 @@ class UserController extends AbstractController
         $user = $userManager->selectOneById($id);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      
             $user = array_map('trim', $_POST);
 
             if (count($this->checkUserForm()) == 0) {

@@ -34,7 +34,7 @@ class CategoryController extends AbstractController
             $category = array_map('trim', $_POST);
 
             $categoryManager = new CategoryManager();
-            $id = $categoryManager->insert($category);
+            $categoryManager->insert($category);
             header('Location: /category/index');
         }
         return $this->twig->render('Category/add.html.twig');

@@ -20,14 +20,11 @@ class AdvertHelpController extends AbstractController
         return $errors;
     }
 
-
     public function show(string $id)
     {
-        
         $adverthelpManager = new AdvertHelpManager();
-        
         $adverthelp = $adverthelpManager->selectAllMessageByHelp($id);
-        
+
         return $this->twig->render('AdvertHelp/show.html.twig', ['adverthelp' => $adverthelp]);
     }
 
@@ -49,10 +46,10 @@ class AdvertHelpController extends AbstractController
                 $adverthelp['id_chat'] = uniqid();
                 $adverthelp['id_author'] = $_SESSION['user']['id'];
                 $id = $adverthelp['id_chat'];
-                
+
                 $adverthelpManager = new AdvertHelpManager();
                 $adverthelpManager->insert($adverthelp);
-                
+
                 header('Location:/advertHelp/show/' . $id);
             } else {
                 return $this->twig->render('advertHelp/add.html.twig', [
@@ -76,7 +73,6 @@ class AdvertHelpController extends AbstractController
             }
 
             if (count($this->checkAdvertForm()) == 0) {
-                
                 $adverthelp['advert_id'] = $_GET['advert_id'];
                 $adverthelp['user_id'] = $_GET['user_id'];
                 $adverthelp['date'] = date('Y , m , H:i:s');
@@ -96,5 +92,4 @@ class AdvertHelpController extends AbstractController
         }
         return $this->twig->render('AdvertHelp/add.html.twig');
     }
-   
 }

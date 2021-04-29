@@ -24,23 +24,23 @@ class AdvertHelpManager extends AbstractManager
     }
 
     public function selectAllMessageByHelp($id): array
-    {   
+    {
         $statement = $this->pdo->prepare("SELECT * FROM " . static::TABLE . " WHERE id_chat=:id");
         $statement->bindValue('id', $id, \PDO::PARAM_STR);
         $statement->execute();
-    
+
         return $statement->fetchAll();
     }
 
     public function selectAllHelpByUser($id): array
     {
-        $statement = $this->pdo->prepare("SELECT DISTINCT id_chat, title, advert.user_id, id_author FROM " . static::TABLE . " 
+        $statement = $this->pdo->prepare("SELECT DISTINCT id_chat, title, advert.user_id, id_author 
+        FROM " . static::TABLE . " 
         JOIN advert ON advert.id = adverthelp.advert_id");
-        //WHERE advert.user_id=:id
- 
+
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
-    
+
         return $statement->fetchAll();
     }
 }
