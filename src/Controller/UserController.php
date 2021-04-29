@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Model\UserManager;
 use App\Model\AdvertManager;
+use App\Model\AdvertHelpManager;
 use App\Controller\CheckForm;
 use App\Controller\AuthController;
 
@@ -83,12 +84,16 @@ class UserController extends AbstractController
     {
         $userManager = new UserManager();
         $advertManager = new AdvertManager();
+        $helpManager = new AdvertHelpManager();
         $user = $userManager->selectOneById($id);
         $advert = $advertManager->selectByUserId($id);
+        $help = $helpManager->selectAllHelpByUser($id);
+        
 
         return $this->twig->render('User/userShow.html.twig', [
             'user' => $user,
-            'advert' => $advert
+            'advert' => $advert,
+            'help' => $help
             ]);
     }
 
@@ -140,9 +145,9 @@ class UserController extends AbstractController
         $user = $userManager->selectOneById($id);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // clean $_POST data
+      
             $user = array_map('trim', $_POST);
-            // if validation is ok, update and redirection
+
             if (count($this->checkUserForm()) == 0) {
                 if (!isset($user['avatar'])) {
                     $user['avatar'] = $userManager->selectOneById($id)['avatar'];
@@ -167,5 +172,10 @@ class UserController extends AbstractController
         return $this->twig->render('User/edit.html.twig', [
             'user' => $user,
         ]);
+    }
+
+    public function userAdmin()
+    {
+        return $this->twig->render('User/userAdmin.html.twig');
     }
 }

@@ -28,24 +28,57 @@
             {% if session.user.id == user.id %}
                 <a href="/user/edit/{{ session.user.id }}">Modifier Profil</a>
                 <a href="/Advert/add">Ajoute une annonce</a>
+                <form class="delete" action="/user/delete/{{key.id}}" method="POST">
+                    <button class="btnDelete">Supprimer</button>
+                </form>
             {% endif %}
         </div>
        
         <div class="leftContainer">        
 
-            {% for key in advert %} 
-                    <div>
-                        <a href="/Advert/show/{{ key.id }}"> {{ key.title }}</a>
-                        <p> {{key.description}} </p>
-                    </div>
-            {% endfor %}
+            <div>
+                <h2>Mes annonces</h2>
+                
+                {% for key in advert %} 
+                        <div>
+                            <a href="/Advert/show/{{ key.id }}"> {{ key.title }}</a>
+                            <p> {{key.description}} </p>
+                        </div>
+                {% endfor %}
 
-            {% if advert is empty %}
-                <p>Acunne annonce disponible.</p>
-            {% endif %}   
+                {% if advert is empty %}
+                    <p>Acunne annonce disponible.</p>
+                {% endif %}   
+            </div>
             
+            {% if session.user.id == user.id %}
+                <div>
+                    <h2>Les Helps en attentes :</h2>
+
+                    <div>
+                        {% for key in help %} 
+                            {% if key.user_id == session.user.id %}
+                                <a href="/Adverthelp/show/{{key.id_chat}}">{{ key.title }}</a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div>
+                    <h2>Mes demande de Hepls :</h2>
+                    
+                    <div>
+                        {% for key in help %}
+                            {% if key.user_id != session.user.id and key.id_author == session.user.id %}
+                                <a href="/Adverthelp/show/{{key.id_chat}}">{{ key.title }}</a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        
         </div>
-       
+
     <div>
 
    

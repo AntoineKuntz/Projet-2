@@ -38,7 +38,8 @@ class CheckForm extends AbstractController
             'category1' => 'Veuillez choisir une catégorie.',
             'description1' => 'Décrivez en quelque mots votre annonce s\'il vous plait. ',
             'disponibility1' => 'merci de rajouter vos disponibilitées.',
-            'category_id1' => 'Veuillez selectionner une catégorie'
+            'category_id1' => 'Veuillez selectionner une catégorie',
+            'message1' => 'merci de rajouter des informations supplémentaire a votre message.'
         ];
 
         $error = $this->checkEmptyErrors();

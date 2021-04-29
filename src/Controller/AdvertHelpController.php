@@ -5,46 +5,96 @@
 namespace App\Controller;
 
 use App\Model\AdvertHelpManager;
+use App\Controller\CheckForm;
 
 class AdvertHelpController extends AbstractController
 {
-    // montre les informations disponibles pour une annonces spécifiques
-    public function show(int $id): string
+    public function checkAdvertForm()
     {
-        $adverthelpManager = new AdvertHelpManager();
-        $adverthelp = $adverthelpManager->selectOneById($id);
+        $checkForm = new CheckForm();
 
+        if ($checkForm->displayEmptyErrors() <= 0) {
+            return $errors = array();
+        }
+        $errors = $checkForm->displayEmptyErrors();
+        return $errors;
+    }
+
+
+    public function show(string $id)
+    {
+        
+        $adverthelpManager = new AdvertHelpManager();
+        
+        $adverthelp = $adverthelpManager->selectAllMessageByHelp($id);
+        
         return $this->twig->render('AdvertHelp/show.html.twig', ['adverthelp' => $adverthelp]);
     }
-    // Ajouter une nouvelle annonce via un form
 
     public function add(): string
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // clean $_POST data
             $adverthelp = array_map('trim', $_POST);
-            //envoie la date précise au moment ou le message est poster
-            if (!isset($_POST['date'])) {
-                $adverthelp['date'] = date('Y , m , H:i:s');
-            }
-            //sécurisation du formulaire
-            $errors = "";
-            if (empty($adverthelp['message'])) {
-                $errors = 'merci de rajouter des informations supplémentaire a votre message.';
-                return $errors;
-            }
-            // possibilité lors du form
-            // cloture de l'annonce
+
             if (!empty($_POST['isValidate'])) {
                 $adverthelp['isValidate'] = 1;
-                // transmissions des informations et redirections sur la page index
             } else {
                 $adverthelp['isValidate'] = 0;
             }
-            $adverthelpManager = new AdvertHelpManager();
-            $id = $adverthelpManager->insert($adverthelp);
-            header('Location:/advertHelp/show/' . $id);
+
+            if (count($this->checkAdvertForm()) == 0) {
+                $adverthelp['advert_id'] = $_GET['advert_id'];
+                $adverthelp['user_id'] = $_GET['user_id'];
+                $adverthelp['date'] = date('Y , m , H:i:s');
+                $adverthelp['id_chat'] = uniqid();
+                $adverthelp['id_author'] = $_SESSION['user']['id'];
+                $id = $adverthelp['id_chat'];
+                
+                $adverthelpManager = new AdvertHelpManager();
+                $adverthelpManager->insert($adverthelp);
+                
+                header('Location:/advertHelp/show/' . $id);
+            } else {
+                return $this->twig->render('advertHelp/add.html.twig', [
+                    'advert' => $adverthelp,
+                    'errors' => $this->checkAdvertForm()
+                ]);
+            }
         }
         return $this->twig->render('AdvertHelp/add.html.twig');
     }
+
+    public function respond(): string
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $adverthelp = array_map('trim', $_POST);
+
+            if (!empty($_POST['isValidate'])) {
+                $adverthelp['isValidate'] = 1;
+            } else {
+                $adverthelp['isValidate'] = 0;
+            }
+
+            if (count($this->checkAdvertForm()) == 0) {
+                
+                $adverthelp['advert_id'] = $_GET['advert_id'];
+                $adverthelp['user_id'] = $_GET['user_id'];
+                $adverthelp['date'] = date('Y , m , H:i:s');
+                $adverthelp['id_chat'] = $_GET['id_chat'];
+                $id = $adverthelp['id_chat'];
+                $adverthelp['id_author'] = $_SESSION['user']['id'];
+
+                $adverthelpManager = new AdvertHelpManager();
+                $adverthelpManager->insert($adverthelp);
+                header('Location:/advertHelp/show/' . $id);
+            } else {
+                return $this->twig->render('advertHelp/add.html.twig', [
+                    'advert' => $adverthelp,
+                    'errors' => $this->checkAdvertForm()
+                ]);
+            }
+        }
+        return $this->twig->render('AdvertHelp/add.html.twig');
+    }
+   
 }

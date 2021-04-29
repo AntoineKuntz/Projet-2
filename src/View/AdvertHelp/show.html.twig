@@ -2,19 +2,15 @@
 
 {% block content %}
 
-     <p> {{ adverthelp.date }}</p>
-    <p> {{ adverthelp.message }}</p>
-     
-    
+    {% for key in adverthelp %}
+        <p> {{ key.date }}</p>
+        <p> {{ key.message }}</p>
+     {% endfor %}
 
-    <form action="/Advert/delete/{{advert.id}}" method="POST">
-    
+    <form action="" method="POST">
+        <a href="/AdvertHelp/respond/?advert_id={{adverthelp.0.advert_id}}&user_id={{adverthelp.0.user_id}}&id_chat={{adverthelp.0.id_chat}}">Ajouter un message</a>
     </form>
 
-    
-    </br>
-    <a href="/AdvertHelp/add">Ajouter un message</a>
-    </br>
-    <a href="/Advert/index">Back</a>
-   
+    <a href="/user/userShow/{{session.user.id}}">Retour</a>
+
 {% endblock %}

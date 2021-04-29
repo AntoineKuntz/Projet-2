@@ -34,8 +34,8 @@
                                 {% if session.user.status == '1' %}
                                     <div class="adminBtnContainer">
                                         <a href="/user/edit/{{ key.id }}">Edit</a>
-                                        <form action="/user/delete/{{key.id}}" method="POST">
-                                            <button>Delete</button>
+                                        <form class="delete" action="/user/delete/{{key.id}}" method="POST">
+                                            <button class="btnDelete">Delete</button>
                                         </form>
                                     </div>
                                 {% endif %}

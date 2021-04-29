@@ -16,7 +16,10 @@
         </div>
         
         <div class="footer">
-            <a href="/user/userShow/{{ session.user.id }}">Plus</a>
+            <a href="/user/userShow/{{ session.user.id }}">Profil</a>
+            {% if session.user.status == 1 %}
+            <a href="/user/userAdmin">Admin</a>
+            {% endif %}
         </div>
    
     </div>

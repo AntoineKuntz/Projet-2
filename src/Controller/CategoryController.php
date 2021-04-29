@@ -10,7 +10,6 @@ class CategoryController extends AbstractController
     {
         $categoryManager = new CategoryManager();
         $categories = $categoryManager->selectAll('name');
-
         return $this->twig->render('Category/index.html.twig', ['categories' => $categories]);
     }
 
@@ -36,7 +35,7 @@ class CategoryController extends AbstractController
 
             $categoryManager = new CategoryManager();
             $id = $categoryManager->insert($category);
-            header('Location: /category/index' . $id);
+            header('Location: /category/index');
         }
         return $this->twig->render('Category/add.html.twig');
     }
