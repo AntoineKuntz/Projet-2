@@ -18,11 +18,10 @@ class AdvertController extends AbstractController
         $filteredAdvert = array();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
             if (isset($_POST['disponibility_id']) && $_POST['disponibility_id'] !== "") {
                 $filteredAdvert = $advertManager->selectByDisponibility(intval($_POST['disponibility_id']));
             }
-            
+
             if (isset($_POST['category_id']) && $_POST['category_id'] !== "") {
                 $filteredAdvert = $advertManager->selectByCategoryId(intval($_POST['category_id']));
             }
@@ -30,9 +29,6 @@ class AdvertController extends AbstractController
             if (isset($_POST['search']) && $_POST['search'] !== "") {
                 $term = htmlspecialchars($_POST['search']);
                 $filteredAdvert = $userManager->searchByUser($term);
-            }  
-            if (count($filteredAdvert) == 0 || empty($filteredAdvert)){
-
             }
         }
         return $filteredAdvert;
@@ -54,15 +50,13 @@ class AdvertController extends AbstractController
 
     public function index()
     {
-        
-
         $advertManager = new AdvertManager();
         $categoryManager = new CategoryManager();
         $disponibilityManager = new DisponibilityManager();
 
         $userManager = new UserManager();
         $advert = $advertManager->selectAll();
-        
+
         if (count($this->filterAdvert()) > 0) {
             return $this->twig->render('Advert/index.html.twig', [
                 'advert' => $this->filterAdvert(),
@@ -104,11 +98,11 @@ class AdvertController extends AbstractController
     {
         $categoryManager = new CategoryManager();
         $disponibilityManager = new DisponibilityManager();
-        
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // clean $_POST data
-           $advertDatas = array_map('trim', $_POST);
-           
+            $advertDatas = array_map('trim', $_POST);
+
             if (count($this->checkAdvertForm()) == 0) {
                 $advertManager = new AdvertManager();
                 $advertManager->insert($advertDatas);

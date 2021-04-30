@@ -67,7 +67,8 @@ class AdvertManager extends AbstractManager
 
     public function selectByDisponibility(int $id): array
     {
-        $statement = $this->pdo->prepare("SELECT * FROM " . static::TABLE . " WHERE disponibility_id=:disponibility_id");
+        $statement = $this->pdo->prepare("SELECT * FROM " . static::TABLE .
+        " WHERE disponibility_id=:disponibility_id");
         $statement->bindValue('disponibility_id', $id, \PDO::PARAM_INT);
         $statement->execute();
 
