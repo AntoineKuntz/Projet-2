@@ -9,7 +9,7 @@ class CategoryController extends AbstractController
     public function index(): string
     {
         $categoryManager = new CategoryManager();
-        $categories = $categoryManager->selectAll('name');
+        $categories = $categoryManager->selectAll();
         return $this->twig->render('Category/index.html.twig', ['categories' => $categories]);
     }
 

@@ -11,13 +11,30 @@
                 {% if session.user.id != key.user_id %}
                     
                     <div>
-                        <h2><a href="/Advert/show/{{ key.id }}"> {{ key.title }} -- </a><span>{{ key.category_id }}</span></h2>
-                        
-                        {% for ref in user %}{% if ref.id == key.user_id %} <p>{{ ref.lastName }} {{ ref.firstName }}</p> {% endif %} {% endfor %}
+                        <h2><a href="/Advert/show/{{ key.id }}"> {{ key.title }} -- </a>
+                            {% for index in category %}
+                                {% if key.category_id == index.id %}
+                                    <span>{{ index.name }} </span>
+                                {% endif %}
+                            {% endfor %}
+                        </h2>
+        
+                        {% for ref in user %}
+                            {% if ref.id == key.user_id %} 
+                                <p>{{ ref.lastName }} {{ ref.firstName }}</p> 
+                            {% endif %} 
+                        {% endfor %}
                         
                         <p> {{key.description}} </p>
 
+                        {% for index in disponibility %}
+                                {% if key.disponibility_id == index.id %}
+                                    <p>{{ index.timeTable }} </p>
+                                {% endif %}
+                        {% endfor %}
+
                     </div>
+                    
                 {% endif %}
             {% else %}
                 <p>Aucune annonce disponible !</p>

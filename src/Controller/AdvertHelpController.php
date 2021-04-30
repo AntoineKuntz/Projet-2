@@ -42,7 +42,7 @@ class AdvertHelpController extends AbstractController
             if (count($this->checkAdvertForm()) == 0) {
                 $adverthelp['advert_id'] = $_GET['advert_id'];
                 $adverthelp['user_id'] = $_GET['user_id'];
-                $adverthelp['date'] = date('Y , m , H:i:s');
+                $adverthelp['date'] = date('Y , m ,d , H:i:s');
                 $adverthelp['id_chat'] = uniqid();
                 $adverthelp['id_author'] = $_SESSION['user']['id'];
                 $id = $adverthelp['id_chat'];

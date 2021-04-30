@@ -16,7 +16,10 @@
             </form>
         
         {% endif %}
-        <a href="/Adverthelp/add/?advert_id={{advert.id}}&user_id={{user.id}}">Demander l'aide</a>
+
+        {% if session.user.id != user.id %}
+            <a href="/Adverthelp/add/?advert_id={{advert.id}}&user_id={{user.id}}">Demander l'aide</a>
+        {% endif %}
         <a href="/Advert/index">Back</a>
     </div>
 

@@ -37,7 +37,7 @@ class CheckForm extends AbstractController
             'title1' => 'Nous avons besoin d\'un titre pour votre annonce !',
             'category1' => 'Veuillez choisir une catégorie.',
             'description1' => 'Décrivez en quelque mots votre annonce s\'il vous plait. ',
-            'disponibility1' => 'merci de rajouter vos disponibilitées.',
+            'disponibility_id1' => 'Veuillez définir vos disponibilitées.',
             'category_id1' => 'Veuillez selectionner une catégorie',
             'message1' => 'merci de rajouter des informations supplémentaire a votre message.'
         ];

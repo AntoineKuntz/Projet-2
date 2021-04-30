@@ -11,14 +11,14 @@ class AdvertManager extends AbstractManager
     public function insert(array $advert): int
     {
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " 
-        (user_id, title, category_id, description, disponibility)
+        (user_id, title, category_id, description, disponibility_id)
         VALUES 
-        (:user_id, :title, :category_id, :description, :disponibility)");
+        (:user_id, :title, :category_id, :description, :disponibility_id)");
         $statement->bindValue('user_id', $advert['user_id'], \PDO::PARAM_INT);
         $statement->bindValue('title', $advert['title'], \PDO::PARAM_STR);
         $statement->bindValue('category_id', $advert['category_id'], \PDO::PARAM_INT);
         $statement->bindValue('description', $advert['description'], \PDO::PARAM_STR);
-        $statement->bindValue('disponibility', $advert['disponibility'], \PDO::PARAM_STR);
+        $statement->bindValue('disponibility_id', $advert['disponibility_id'], \PDO::PARAM_INT);
 
         $statement->execute();
         return (int)$this->pdo->lastInsertId();
@@ -34,14 +34,14 @@ class AdvertManager extends AbstractManager
         `title`= :title ,
         `category_id`= :category_id,
         `description` = :description ,
-        `disponibility` = :disponibility
+        `disponibility_id` = :disponibility_id
          WHERE id=:id");
         $statement->bindValue('user_id', $advert['user_id'], \PDO::PARAM_INT);
         $statement->bindValue('id', $advert['id'], \PDO::PARAM_INT);
         $statement->bindValue('title', $advert['title'], \PDO::PARAM_STR);
         $statement->bindValue('category_id', $advert['category_id'], \PDO::PARAM_INT);
         $statement->bindValue('description', $advert['description'], \PDO::PARAM_STR);
-        $statement->bindValue('disponibility', $advert['disponibility'], \PDO::PARAM_STR);
+        $statement->bindValue('disponibility_id', $advert['disponibility_id'], \PDO::PARAM_INT);
 
         return $statement->execute();
     }
@@ -60,6 +60,15 @@ class AdvertManager extends AbstractManager
     {
         $statement = $this->pdo->prepare("SELECT * FROM " . static::TABLE . " WHERE category_id=:category_id");
         $statement->bindValue('category_id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
+
+    public function selectByDisponibility(int $id): array
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM " . static::TABLE . " WHERE disponibility_id=:disponibility_id");
+        $statement->bindValue('disponibility_id', $id, \PDO::PARAM_INT);
         $statement->execute();
 
         return $statement->fetchAll();

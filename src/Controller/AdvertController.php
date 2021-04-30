@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Model\CategoryManager;
+use App\Model\DisponibilityManager;
 use App\Model\AdvertManager;
 use App\Model\UserManager;
 use App\Controller\CheckForm;
@@ -9,7 +11,6 @@ use App\Controller\CheckForm;
 class AdvertController extends AbstractController
 {
 
-    //Filtres de recherche
     public function filterAdvert()
     {
         $advertManager = new AdvertManager();
@@ -17,16 +18,23 @@ class AdvertController extends AbstractController
         $filteredAdvert = array();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_POST['category']) && $_POST['category'] !== "") {
-                $filteredAdvert = $advertManager->selectByCategoryId($_POST['category']);
+
+            if (isset($_POST['disponibility_id']) && $_POST['disponibility_id'] !== "") {
+                $filteredAdvert = $advertManager->selectByDisponibility(intval($_POST['disponibility_id']));
+            }
+            
+            if (isset($_POST['category_id']) && $_POST['category_id'] !== "") {
+                $filteredAdvert = $advertManager->selectByCategoryId(intval($_POST['category_id']));
             }
 
             if (isset($_POST['search']) && $_POST['search'] !== "") {
                 $term = htmlspecialchars($_POST['search']);
                 $filteredAdvert = $userManager->searchByUser($term);
+            }  
+            if (count($filteredAdvert) == 0 || empty($filteredAdvert)){
+
             }
         }
-
         return $filteredAdvert;
     }
 
@@ -46,23 +54,32 @@ class AdvertController extends AbstractController
 
     public function index()
     {
+        
+
         $advertManager = new AdvertManager();
+        $categoryManager = new CategoryManager();
+        $disponibilityManager = new DisponibilityManager();
 
         $userManager = new UserManager();
         $advert = $advertManager->selectAll();
-
+        
         if (count($this->filterAdvert()) > 0) {
             return $this->twig->render('Advert/index.html.twig', [
                 'advert' => $this->filterAdvert(),
-
+                'user' => $userManager->selectAll(),
+                'category' => $categoryManager->selectAll(),
+                'disponibility' => $disponibilityManager->selectAll()
                 ]);
         }
+
         if (!isset($_SESSION['user'])) {
             header('Location:../auth/logIn');
         } else {
             return $this->twig->render('Advert/index.html.twig', [
                 'advert' => $advert,
-                'user' => $userManager->selectAll()
+                'user' => $userManager->selectAll(),
+                'category' => $categoryManager->selectAll(),
+                'disponibility' => $disponibilityManager->selectAll()
                 ]);
         }
     }
@@ -81,15 +98,17 @@ class AdvertController extends AbstractController
             ]);
     }
 
-
 // Ajouter une nouvelle annonce via un form
 
     public function add(): string
     {
+        $categoryManager = new CategoryManager();
+        $disponibilityManager = new DisponibilityManager();
+        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // clean $_POST data
-            $advertDatas = array_map('trim', $_POST);
-
+           $advertDatas = array_map('trim', $_POST);
+           
             if (count($this->checkAdvertForm()) == 0) {
                 $advertManager = new AdvertManager();
                 $advertManager->insert($advertDatas);
@@ -101,7 +120,10 @@ class AdvertController extends AbstractController
                 ]);
             }
         }
-        return $this->twig->render('Advert/add.html.twig');
+        return $this->twig->render('Advert/add.html.twig', [
+            'category' => $categoryManager->selectAll(),
+            'disponibility' => $disponibilityManager->selectAll()
+        ]);
     }
 
 // modiffication des annonces existantes

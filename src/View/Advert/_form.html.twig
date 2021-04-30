@@ -13,20 +13,27 @@
           <label for="category">Catégorie :</label>
           <select name="category_id">
                <option value="">--selectioner une categorie</option>
-               <option value="1">Education</option>
-               <option value="2">Traveaux d'intérieur</option>
+               {% for key in category %}
+                    <option value="{{key.id}}">{{key.name}}</option>
+               {% endfor %}
           </select>
           <p class="errors">{{errors.category_id1}}</p>
      </div>
      <div>
           <label for="description">Description :</label>
-          <input type="text" value="{{ advert.description }}" name="description">
+          <textarea type="text" value="{{ advert.description }}" name="description"></textarea>
           <p class="errors">{{errors.description1}}</p>
      </div>
      
      <div>
           <label for="disponibility">Disponibilité :</label>
-          <textarea value="{{ advert.comment }}" name="disponibility" ></textarea>
+          
+          <select name="disponibility_id">
+               <option>--Vos disponibilité</option>
+               {% for key in disponibility %}
+                    <option value="{{key.id}}">{{key.timeTable}}</option>
+               {% endfor %}
+          </select>
           <p class="errors">{{errors.disponibility1}}</p>
      </div>
 
