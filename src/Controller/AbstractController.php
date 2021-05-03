@@ -43,8 +43,8 @@ abstract class AbstractController
         //RESTRICTION D ACCES
         if (!isset($_SESSION['user'])) {
             header('Location:/auth/logIn');
-        } else if ($_SESSION['user']['status'] !== '1') {
-            header ('Location:../Home/index');
+        } elseif ($_SESSION['user']['status'] !== '1') {
+            header('Location:../Home/index');
         };
     }
 

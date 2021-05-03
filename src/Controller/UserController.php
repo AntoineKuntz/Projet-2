@@ -85,16 +85,14 @@ class UserController extends AbstractController
         $userManager = new UserManager();
         $advertManager = new AdvertManager();
         $helpManager = new AdvertHelpManager();
-        $reviewManager = new ReviewManager();
         $user = $userManager->selectOneById($id);
         $advert = $advertManager->selectByUserId($id);
         $help = $helpManager->selectAllHelpByUser($id);
 
         // GROUPER LES HELP PAR ID_CHAT
         $group = array();
-        foreach($help as $data) {
+        foreach ($help as $data) {
             $group[$data['id_chat']][] = $data;
-            
         }
 
         $this->restrictLogIn();
@@ -102,7 +100,7 @@ class UserController extends AbstractController
                     'user' => $user,
                     'advert' => $advert,
                     'help' => $group
-        ]);   
+        ]);
     }
 
     /**

@@ -77,9 +77,8 @@ class AdvertController extends AbstractController
             'category' => $categoryManager->selectAll(),
             'disponibility' => $disponibilityManager->selectAll(),
             'average' => $reviewManager->averageCount()
-        ]);   
+        ]);
     }
-
     // montre les informations disponibles pour une annonces spécifiques
 
     public function show(int $id): string
@@ -89,7 +88,7 @@ class AdvertController extends AbstractController
         $reviewManager = new ReviewManager();
         $disponibilityManager = new DisponibilityManager();
         $advert = $advertManager->selectOneById($id);
-        
+
         $this->restrictLogIn();
         return $this->twig->render('Advert/show.html.twig', [
             'advert' => $advert,
@@ -106,7 +105,7 @@ class AdvertController extends AbstractController
     {
         $categoryManager = new CategoryManager();
         $disponibilityManager = new DisponibilityManager();
-        
+
         $this->restrictLogIn();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

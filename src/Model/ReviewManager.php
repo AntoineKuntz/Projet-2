@@ -14,7 +14,7 @@ class ReviewManager extends AbstractManager
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " 
         ( `advert_id`, `user_id`, `advertHelp_id`, `rate`, `comment`, `date` ) 
         VALUES (:advert_id, :user_id, :advertHelp_id, :rate, :comment, :date)");
-        
+
         $statement->bindValue('advert_id', $help['advert_id'], \PDO::PARAM_INT);
         $statement->bindValue('user_id', $help['user_id'], \PDO::PARAM_INT);
         $statement->bindValue('advertHelp_id', $help['advertHelp_id'], \PDO::PARAM_INT);
@@ -52,12 +52,12 @@ class ReviewManager extends AbstractManager
 
         return $this->pdo->query($query)->fetchAll();
     }
-    
+
      /**
      * Get one row from database by ID.
      *
      */
-    public function selectOneByHelp_Id(int $id)
+    public function selectOneByHelpId(int $id)
     {
         $statement = $this->pdo->prepare("SELECT * FROM " . static::TABLE . " WHERE advertHelp_id=:advertHelp_id");
         $statement->bindValue('advertHelp_id', $id, \PDO::PARAM_INT);
@@ -71,7 +71,8 @@ class ReviewManager extends AbstractManager
      */
     public function averageCount()
     {
-        $query = 'SELECT advert_id advert, user_id helper, ROUND(AVG(rate), 1) average, COUNT(*) nbRate FROM ' . static::TABLE . ' GROUP BY advert_id';
+        $query = 'SELECT advert_id advert, user_id helper, ROUND(AVG(rate), 1) average, COUNT(*) nbRate 
+        FROM ' . static::TABLE . ' GROUP BY advert_id';
         return $this->pdo->query($query)->fetchAll();
     }
 }

@@ -12,7 +12,6 @@ class AuthManager extends AbstractManager
         $statement->bindValue('mail', $mail, \PDO::PARAM_STR);
         $statement->execute();
 
-       
         return $statement->fetch();
     }
 }

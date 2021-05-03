@@ -30,6 +30,4 @@ class HomeController extends AbstractController
             'bestUser' => $userManger->bestUser()
         ]);
     }
-
-
 }

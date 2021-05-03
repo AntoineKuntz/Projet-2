@@ -26,7 +26,7 @@ class DisponibilityController extends AbstractController
         }
 
         $this->restrictAdmin();
-        return $this->twig->render('Disponibility/edit.html.twig', ['disponibility' => $disponibility]); 
+        return $this->twig->render('Disponibility/edit.html.twig', ['disponibility' => $disponibility]);
     }
 
     public function add(): string
@@ -37,7 +37,6 @@ class DisponibilityController extends AbstractController
             $disponibilityManager->insert($disponibility);
             header('Location:/Disponibility/index');
         }
-        
         $this->restrictAdmin();
         return $this->twig->render('Disponibility/add.html.twig');
     }
