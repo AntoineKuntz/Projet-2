@@ -1,0 +1,24 @@
+.home .helper {
+    display: flex;
+    height: 90vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.text {
+    width: 50%;
+}
+
+.round {
+    display: flex;
+    align-items: center;
+    width: 700px;
+    height: 700px;
+    border-radius: 100%;
+    background: linear-gradient(90deg, #FFDBB1, #FF7A18);
+}
+
+.round .profilCard {
+    box-shadow: -1rem 0 3rem #000;
+    margin: 0;
+}

@@ -6,8 +6,6 @@ class AdvertManager extends AbstractManager
 {
     public const TABLE = 'advert';
 
-// insertions de nouvelle information dans la bdd
-
     public function insert(array $advert): int
     {
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " 
@@ -23,8 +21,6 @@ class AdvertManager extends AbstractManager
         $statement->execute();
         return (int)$this->pdo->lastInsertId();
     }
-
-// mise a jours des informations présente dans la bdd
 
     public function update(array $advert): bool
     {

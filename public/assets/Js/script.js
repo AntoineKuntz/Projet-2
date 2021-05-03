@@ -30,18 +30,18 @@ if(rating){
     })
 }
 
+// POP UP DELETE
 
 if(document.querySelector('form.delete')){
-    let form = document.querySelector('form.delete');  // <= Tu selection ta balise form
-    let btn = document.querySelector('.btnDelete'); // <= Tu selection tpn btn submit
-
-
-    form.addEventListener('submit', (e)=>{  //<= tu ecoute l'évènement submit 
-        e.preventDefault();        // <= tu empêche l'envoie du formulaire
-        if(confirm('Est ce que Fx est le Wilder du mois ?')){   // <= Si tu click sur ok la valeur est true
-            form.submit();       // <= Alors tu envoie ton formulaire
-        }else{
-            alert('Pour moi si ;D');  // <== Dans ton cas ne met pas de else si tu veux pas d'action
-        }
+    let form = document.querySelectorAll('form.delete'); 
+    
+    form.forEach(btn =>{
+        btn.addEventListener('submit', (e)=>{ 
+            e.preventDefault();
+            if(confirm('Êtes vous sûr ?')){  
+                 e.target.submit();
+            }
+        })
     })
+    
 }

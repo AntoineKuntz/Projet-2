@@ -10,6 +10,8 @@ class DisponibilityController extends AbstractController
     {
         $disponibilityManager = new DisponibilityManager();
         $disponibilitys = $disponibilityManager->selectAll('timetable');
+
+        $this->restrictAdmin();
         return $this->twig->render('Disponibility/index.html.twig', ['disponibilitys' => $disponibilitys]);
     }
 
@@ -22,7 +24,9 @@ class DisponibilityController extends AbstractController
             $disponibilityManager->update($disponibility);
             header('Location:/Disponibility/index');
         }
-        return $this->twig->render('Disponibility/edit.html.twig', ['disponibility' => $disponibility]);
+
+        $this->restrictAdmin();
+        return $this->twig->render('Disponibility/edit.html.twig', ['disponibility' => $disponibility]); 
     }
 
     public function add(): string
@@ -33,6 +37,8 @@ class DisponibilityController extends AbstractController
             $disponibilityManager->insert($disponibility);
             header('Location:/Disponibility/index');
         }
+        
+        $this->restrictAdmin();
         return $this->twig->render('Disponibility/add.html.twig');
     }
 

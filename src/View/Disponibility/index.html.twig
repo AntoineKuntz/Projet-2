@@ -9,7 +9,7 @@
     {% for disponibility in disponibilitys %}
 
         <li>Nom Horaire : {{ disponibility.timeTable }}<a href="/Disponibility/edit/{{ disponibility.id }}">Editer vos horaires</a>
-            <form action="/Disponibility/delete/{{ disponibility.id }}" method="POST">
+            <form class="delete" action="/Disponibility/delete/{{ disponibility.id }}" method="POST">
                 <button>Supprimer</button>
             </form>
         </li><br>

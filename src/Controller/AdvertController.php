@@ -7,6 +7,7 @@ use App\Model\DisponibilityManager;
 use App\Model\AdvertManager;
 use App\Model\UserManager;
 use App\Controller\CheckForm;
+use App\Model\ReviewManager;
 
 class AdvertController extends AbstractController
 {
@@ -53,6 +54,7 @@ class AdvertController extends AbstractController
         $advertManager = new AdvertManager();
         $categoryManager = new CategoryManager();
         $disponibilityManager = new DisponibilityManager();
+        $reviewManager = new ReviewManager();
 
         $userManager = new UserManager();
         $advert = $advertManager->selectAll();
@@ -62,20 +64,20 @@ class AdvertController extends AbstractController
                 'advert' => $this->filterAdvert(),
                 'user' => $userManager->selectAll(),
                 'category' => $categoryManager->selectAll(),
-                'disponibility' => $disponibilityManager->selectAll()
+                'disponibility' => $disponibilityManager->selectAll(),
+                'reviews' => $reviewManager->allReviews()
                 ]);
         }
 
-        if (!isset($_SESSION['user'])) {
-            header('Location:../auth/logIn');
-        } else {
-            return $this->twig->render('Advert/index.html.twig', [
-                'advert' => $advert,
-                'user' => $userManager->selectAll(),
-                'category' => $categoryManager->selectAll(),
-                'disponibility' => $disponibilityManager->selectAll()
-                ]);
-        }
+        $this->restrictLogIn();
+
+        return $this->twig->render('Advert/index.html.twig', [
+            'advert' => $advert,
+            'user' => $userManager->selectAll(),
+            'category' => $categoryManager->selectAll(),
+            'disponibility' => $disponibilityManager->selectAll(),
+            'average' => $reviewManager->averageCount()
+        ]);   
     }
 
     // montre les informations disponibles pour une annonces spécifiques
@@ -84,11 +86,17 @@ class AdvertController extends AbstractController
     {
         $advertManager = new AdvertManager();
         $userManager = new UserManager();
+        $reviewManager = new ReviewManager();
+        $disponibilityManager = new DisponibilityManager();
         $advert = $advertManager->selectOneById($id);
-
+        
+        $this->restrictLogIn();
         return $this->twig->render('Advert/show.html.twig', [
             'advert' => $advert,
-            'user' => $userManager->selectOneById($advert['user_id'])
+            'user' => $userManager->selectOneById($advert['user_id']),
+            'average' => $reviewManager->averageCount(),
+            'reviews' => $reviewManager->allReviews(),
+            'disponibility' => $disponibilityManager->selectOneById($advert['disponibility_id'])
             ]);
     }
 
@@ -98,6 +106,8 @@ class AdvertController extends AbstractController
     {
         $categoryManager = new CategoryManager();
         $disponibilityManager = new DisponibilityManager();
+        
+        $this->restrictLogIn();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // clean $_POST data
@@ -114,6 +124,7 @@ class AdvertController extends AbstractController
                 ]);
             }
         }
+
         return $this->twig->render('Advert/add.html.twig', [
             'category' => $categoryManager->selectAll(),
             'disponibility' => $disponibilityManager->selectAll()
@@ -127,6 +138,8 @@ class AdvertController extends AbstractController
     {
         $advertManager = new AdvertManager();
         $advert = $advertManager->selectOneById($id);
+
+        $this->restrictLogIn();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // clean $_POST data

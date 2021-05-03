@@ -72,4 +72,42 @@ class UserManager extends AbstractManager
 
         return $statement->fetchAll();
     }
+
+    /**
+     * Update Badge
+     */
+
+     public function updateBadge($user)
+     {
+        $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET `badge`= :badge WHERE id=:id");
+
+        $statement->bindValue('id', $user['id'], \PDO::PARAM_INT);
+        $statement->bindValue('badge', $user['badge'], \PDO::PARAM_INT);
+        
+
+        return $statement->execute();
+     }
+
+     public function updateRang($user)
+     {
+        $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET `rang`= :rang WHERE id=:id");
+
+        $statement->bindValue('id', $user['id'], \PDO::PARAM_INT);
+        $statement->bindValue('rang', $user['rang'], \PDO::PARAM_INT);
+
+        return $statement->execute();
+     }
+
+     public function bestUser(){
+        $query = 'SELECT user.*, adverthelp.id advertId, ROUND(AVG(reviews.rate), 1) rate
+        FROM ' . static::TABLE .
+        ' JOIN adverthelp ON adverthelp.user_id = user.id
+        JOIN advert ON advert.user_id = user.id
+        JOIN reviews ON reviews.advertHelp_id = adverthelp.id
+        GROUP by user.id
+        ORDER BY rate DESC'
+        ; 
+        
+        return $this->pdo->query($query)->fetchAll();
+     }
 }

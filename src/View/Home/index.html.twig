@@ -2,9 +2,52 @@
 
 {% block content %}
 
-        <h1>Hello {% if session %} {{session.user.userLastName}} {{session.user.userFirstName}}{% else %}Helper{% endif %} !</h1>
+        <div class="home wrapper helpers">
+                <section class="helper">
+                        <div class="text">
+                                <h2>Hello {% if session %} {{session.user.userLastName}} <br> {{session.user.userFirstName}}{% else %}Helper{% endif %} !</h2>
+                        </div>
+                        
+                        <div class="cardList">
+                                <div class="round">
+                                        {% for user in bestUser %}
+                                                <article class="profilCard">
+                            
+                                                        <div class="header">
+                                                                <div class="avatarContainer">
+                                                                        <img class="usersAvatar" src="/assets/images/membres/avatars/{{user.avatar}}">
+                                                                </div>
+                                                                <h4>{{ user.lastName }} {{ user.firstName }}</h4> 
+                                                        </div>
+                                                                
+                                                        <div class="body">     
+                                                                <div class="adress">
+                                                                        <p class="fontLight"> {{ user.adresseNumber}} {{user.adresseStreet}} <br> {{ user.adressePostal}} {{user.adresseCity}}  </p>
+                                                                </div>
+
+                                                                <p>Note : {{user.rate}}/5 </p>  
+                                                                <p class="rang"> Rang : {{ user.rang }} </p>
+                                                        </div>
+                                                                
+                                                        <div class="footer">
+                                                                <a href="userShow/{{ user.id }}" class="btn">Profil</a>
+                                                                        
+                                                                {% if session.user.status == '1' %}
+                                                                        <div class="adminBtnContainer">
+                                                                                <a href="/user/edit/{{ user.id }}">Edit</a>
+                                                                                <form class="delete" action="/user/delete/{{user.id}}" method="POST">
+                                                                                        <button class="btnDelete">Delete</button>
+                                                                                </form>
+                                                                        </div>
+                                                                {% endif %}
+                                                        </div>
+                                                </article>
+                                        {% endfor %}
+                                </div>
+                        </div>
+                </section>
+        </div>
         
-        {% if session %}
-                <a href="/review/add">Commenter</a>
-        {% endif %}
+        
+        
 {% endblock %}

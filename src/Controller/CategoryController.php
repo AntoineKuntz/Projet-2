@@ -10,7 +10,9 @@ class CategoryController extends AbstractController
     {
         $categoryManager = new CategoryManager();
         $categories = $categoryManager->selectAll();
-        return $this->twig->render('Category/index.html.twig', ['categories' => $categories]);
+
+        $this->restrictAdmin();
+        return $this->twig->render('Category/index.html.twig', ['categories' => $categories]);    
     }
 
     public function edit(int $id): string
@@ -25,6 +27,7 @@ class CategoryController extends AbstractController
             header('Location: /category/index');
         }
 
+        $this->restrictAdmin();
         return $this->twig->render('Category/edit.html.twig', ['category' => $category,]);
     }
 
@@ -37,6 +40,8 @@ class CategoryController extends AbstractController
             $categoryManager->insert($category);
             header('Location: /category/index');
         }
+        
+        $this->restrictAdmin();
         return $this->twig->render('Category/add.html.twig');
     }
 

@@ -1,66 +1,3 @@
-/* --------------------------------------------------- USER $_SESSION PROFILE  */
-
-
-/*  ----------------------- PROFIL */
-
-.profilDetails {
-    position: absolute;
-    top: 150%;
-    right: 0;
-    width: 15vw;
-    padding: 5%;
-    transform: translateX(300%);
-    opacity: 0;
-    transition: transform .3s ease-in;
-    z-index: 10000;
-}
-
-.profilDetails.active {
-    transform: translateX(0);
-    opacity: 1;
-}
-
-.profilCard {
-    border-radius: 10px;
-    text-align: center;
-    padding: 5%;
-    box-shadow: 6px 3px 14px 2px #4444;
-}
-
-.profilCard:hover .avatarContainer img {
-    transform: translateZ(70px);
-    box-shadow: 6px 6px 10px 1px #4444;
-}
-
-.avatarContainer img {
-    border-radius: 100%;
-    padding: 2%;
-    transition: all .2s ease-in;
-}
-
-.helpers .avatarContainer img,
-.profilCard .avatarContainer img {
-    width: 100px;
-    height: 100px;
-}
-
-.profilCard .header,
-.profilCard .body {
-    padding: 5% 0;
-    border-bottom: 1px solid var(--salmon);
-}
-
-.profilDetails h4 {
-    font-size: 1.3rem;
-    color: var(--dark-blue);
-}
-
-.profilDetails a {
-    width: 50%;
-    margin: 5% auto;
-}
-
-
 /*  ----------------------- ALL USER */
 
 .helpers .allUsers {
@@ -69,29 +6,52 @@
     flex-wrap: wrap;
 }
 
-.helpers .profilCard {
-    width: 25%;
-    min-width: 200px;
-    max-width: 250px;
+.profilCard {
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    align-items: center;
+    min-width: 250px;
+    max-width: 300px;
+    border-radius: 10px;
+    text-align: center;
     margin: 2%;
     padding: 2%;
-    transform-style: preserve-3d;
-    transform: perspective(1000px);
-    background-color: #231F3B;
+    background: linear-gradient(90deg, #292E35 70%, #202020 100%);
 }
 
-.helpers .avatarContainer img {
-    padding: 0;
-    box-shadow: none;
-    border: 1px solid var(--salmon);
+.profilCard .header {
+    grid-row: 1/3;
+}
+
+.avatarContainer img {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    border: 1px solid #F5B353;
+}
+
+.profilCard h4 {
+    font-size: 1.3rem;
+    color: #bdb9b9;
+}
+
+.profilCard .body {
+    grid-row: 3/5;
+    padding: 5% 0;
+    border-top: 1px solid #F5B353;
+    border-bottom: 1px solid #F5B353;
+}
+
+.profilCard .body * {
+    margin: 5% 0;
+}
+
+.profilCard .footer {
+    grid-row: 5/6;
 }
 
 .helpers .profilCard .body p {
-    color: #f6f6f6;
-}
-
-.rang {
-    margin: 5% 0;
+    color: #928f8f;
 }
 
 .adminBtnContainer {
@@ -110,11 +70,55 @@
 }
 
 .btn {
-    border: 1px solid var(--light-blue);
+    border: 1px solid #F5B353;
     border-radius: 5px;
     margin: 10px auto;
+    color: #F5B353;
 }
 
 .profilCard:hover .btn {
     transform: translateZ(100px);
+}
+
+
+/*  SPECIFIQUE USERPROFIL CARD */
+
+.profilDetails {
+    position: absolute;
+    top: 150%;
+    right: 10%;
+    padding: 5%;
+    transition: transform .3s ease-in;
+    z-index: 10000;
+    transform: scaleX(0.05);
+    transform-origin: right;
+}
+
+.profilDetails.active {
+    transform: scaleX(1);
+}
+
+.profilDetails .profilCard {
+    opacity: 0;
+    transition: all .3s .1s linear;
+}
+
+.profilDetails.active .profilCard {
+    opacity: 1;
+}
+
+.profilDetails .profilCard {
+    background: #F5F5F5;
+    margin: 0;
+    padding: 5%;
+}
+
+.profilDetails h4 {
+    font-size: 1.3rem;
+    color: var(--dark-blue);
+}
+
+.profilDetails a {
+    width: 50%;
+    margin: 5% auto;
 }

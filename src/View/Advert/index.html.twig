@@ -12,21 +12,33 @@
                     
                     <div>
                         <h2><a href="/Advert/show/{{ key.id }}"> {{ key.title }} -- </a>
+                            
+                            {# Category #}
                             {% for index in category %}
                                 {% if key.category_id == index.id %}
                                     <span>{{ index.name }} </span>
                                 {% endif %}
                             {% endfor %}
+                            
+                            {# Rate #}
+                            {% for index in average %}
+                                {% if key.id == index.advert %}
+                                    <span> {{ index.average }}/5  pour {{index.nbRate}} avis<span>
+                                {% endif %}
+                            {% endfor %}
                         </h2>
         
+                        {# User #}
                         {% for ref in user %}
                             {% if ref.id == key.user_id %} 
                                 <p>{{ ref.lastName }} {{ ref.firstName }}</p> 
                             {% endif %} 
                         {% endfor %}
                         
+                        {# Description #}
                         <p> {{key.description}} </p>
 
+                        {# Helper #}
                         {% for index in disponibility %}
                                 {% if key.disponibility_id == index.id %}
                                     <p>{{ index.timeTable }} </p>

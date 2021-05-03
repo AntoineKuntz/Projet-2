@@ -37,4 +37,21 @@ abstract class AbstractController
         $this->twig->addExtension(new DebugExtension());
         $this->twig->addGlobal('session', $_SESSION);
     }
+
+    public function restrictAdmin()
+    {
+        //RESTRICTION D ACCES
+        if (!isset($_SESSION['user'])) {
+            header('Location:/auth/logIn');
+        } else if ($_SESSION['user']['status'] !== '1') {
+            header ('Location:../Home/index');
+        };
+    }
+
+    public function restrictLogIn()
+    {
+        if (!isset($_SESSION['user'])) {
+            header('Location:../auth/logIn');
+        };
+    }
 }

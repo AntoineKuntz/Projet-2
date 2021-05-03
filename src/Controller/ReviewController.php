@@ -35,6 +35,19 @@ class ReviewController extends AbstractController
         return $errors;
     }
 
+    /**
+     * All reviews
+     */
+    public function allReview()
+    {
+        $reviewManager = new ReviewManager();
+        $allReview = $reviewManager->selectAll();
+
+        $this->restrictLogIn();
+        return $this->twig->render('User/allUserShow.html.twig', ['allReview' => $allReview]);
+    }
+    
+
   /**
      * Add a review
      */
@@ -42,13 +55,16 @@ class ReviewController extends AbstractController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $reviewDatas = array_map(array($this, "validData"), $_POST);
+            $reviewDatas['advert_id'] =$_GET['advert_id'];
+            $reviewDatas['user_id'] = $_SESSION['user']['id'];
+            $reviewDatas['advertHelp_id'] = $_GET['id'];
 
-            if (!isset($_POST['date'])) {
-                $reviewDatas['date'] = date('Y , m , H:i:s');
-            }
+            $reviewDatas['date'] = date('Y , m , H:i:s');
+
             if (count($this->checkReviewForm()) == 0) {
                 $reviewManager = new ReviewManager();
                 $reviewManager->insert($reviewDatas);
+                header('Location:/Adverthelp/show/'.$_GET['id_chat']);
             } else {
                 return $this->twig->render('Review/add.html.twig', [
                   'review' => $reviewDatas,
@@ -56,7 +72,7 @@ class ReviewController extends AbstractController
                 ]);
             }
         }
-
         return $this->twig->render('Review/add.html.twig');
     }
+
 }

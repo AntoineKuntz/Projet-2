@@ -7,6 +7,8 @@ use App\Model\AdvertManager;
 use App\Model\AdvertHelpManager;
 use App\Controller\CheckForm;
 use App\Controller\AuthController;
+use App\Model\AuthManager;
+use App\Model\ReviewManager;
 
 class UserController extends AbstractController
 {
@@ -70,11 +72,9 @@ class UserController extends AbstractController
     {
         $userManager = new UserManager();
         $allUser = $userManager->selectAll();
-        if (!isset($_SESSION['user'])) {
-            header('Location:../auth/logIn');
-        } else {
-            return $this->twig->render('User/allUserShow.html.twig', ['user' => $allUser]);
-        }
+
+        $this->restrictLogIn();
+        return $this->twig->render('User/allUserShow.html.twig', ['user' => $allUser]);
     }
 
     /**
@@ -85,15 +85,24 @@ class UserController extends AbstractController
         $userManager = new UserManager();
         $advertManager = new AdvertManager();
         $helpManager = new AdvertHelpManager();
+        $reviewManager = new ReviewManager();
         $user = $userManager->selectOneById($id);
         $advert = $advertManager->selectByUserId($id);
         $help = $helpManager->selectAllHelpByUser($id);
 
+        // GROUPER LES HELP PAR ID_CHAT
+        $group = array();
+        foreach($help as $data) {
+            $group[$data['id_chat']][] = $data;
+            
+        }
+
+        $this->restrictLogIn();
         return $this->twig->render('User/userShow.html.twig', [
-            'user' => $user,
-            'advert' => $advert,
-            'help' => $help
-            ]);
+                    'user' => $user,
+                    'advert' => $advert,
+                    'help' => $group
+        ]);   
     }
 
     /**
@@ -120,7 +129,7 @@ class UserController extends AbstractController
                 ]);
             }
         }
-        return $this->twig->render('User/add.html.twig');
+            return $this->twig->render('User/add.html.twig');
     }
 
     /**
@@ -135,6 +144,19 @@ class UserController extends AbstractController
         }
     }
 
+    /**
+     * Delete own count
+     */
+    public function deleteSelf(int $id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $userManager = new UserManager();
+            $authController = new AuthController();
+            $userManager->delete($id);
+            $authController->logOut();
+            //header('Location:/Home/index');
+        }
+    }
     /**
      * Edit a specific item
      */
@@ -167,6 +189,8 @@ class UserController extends AbstractController
                 ]);
             }
         }
+
+        $this->restrictLogIn();
         return $this->twig->render('User/edit.html.twig', [
             'user' => $user,
         ]);
@@ -174,6 +198,7 @@ class UserController extends AbstractController
 
     public function userAdmin()
     {
+        $this->restrictAdmin();
         return $this->twig->render('User/userAdmin.html.twig');
     }
 }

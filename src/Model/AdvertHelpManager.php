@@ -34,9 +34,12 @@ class AdvertHelpManager extends AbstractManager
 
     public function selectAllHelpByUser($id): array
     {
-        $statement = $this->pdo->prepare("SELECT DISTINCT id_chat, title, advert.user_id, id_author 
+        //var_dump($id); die();
+        $statement = $this->pdo->prepare("SELECT  
+        adverthelp.advert_id, adverthelp.user_id helper,id_author, reviews.user_id helped, id_chat, isValidate, category_id, title, rate
         FROM " . static::TABLE . " 
-        JOIN advert ON advert.id = adverthelp.advert_id");
+        JOIN advert ON advert.id = adverthelp.advert_id
+        LEFT JOIN reviews ON adverthelp.id = reviews.advertHelp_id");
 
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();

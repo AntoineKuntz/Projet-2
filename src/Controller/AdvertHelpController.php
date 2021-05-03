@@ -6,6 +6,8 @@ namespace App\Controller;
 
 use App\Model\AdvertHelpManager;
 use App\Controller\CheckForm;
+use App\Model\UserManager;
+use App\Model\ReviewManager;
 
 class AdvertHelpController extends AbstractController
 {
@@ -23,15 +25,24 @@ class AdvertHelpController extends AbstractController
     public function show(string $id)
     {
         $adverthelpManager = new AdvertHelpManager();
+        $reviewManager = new ReviewManager();
         $adverthelp = $adverthelpManager->selectAllMessageByHelp($id);
+        $advertReview = $reviewManager->selectOneByHelp_Id(end($adverthelp)['id']);
 
-        return $this->twig->render('AdvertHelp/show.html.twig', ['adverthelp' => $adverthelp]);
+        $this->restrictLogIn();
+        return $this->twig->render('AdvertHelp/show.html.twig', [
+            'adverthelp' => $adverthelp,
+            'review' => $advertReview
+        ]);
     }
 
     public function add(): string
     {
+        $this->restrictLogIn();
+        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $adverthelp = array_map('trim', $_POST);
+            
 
             if (!empty($_POST['isValidate'])) {
                 $adverthelp['isValidate'] = 1;
@@ -58,30 +69,51 @@ class AdvertHelpController extends AbstractController
                 ]);
             }
         }
+
         return $this->twig->render('AdvertHelp/add.html.twig');
     }
 
     public function respond(): string
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $adverthelp = array_map('trim', $_POST);
+        $adverthelpManager = new AdvertHelpManager();
+        $userManager = new UserManager();
 
+        $this->restrictLogIn();
+
+        
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            $helped = $userManager->selectOneById($_SESSION['user']['id']);
+            $helper = $userManager->selectOneById($_GET['user_id']);
+            
+            $adverthelp = array_map('trim', $_POST);
+            
+            // SI L AIDE EST VALIDE
             if (!empty($_POST['isValidate'])) {
                 $adverthelp['isValidate'] = 1;
+                $helper['badge']++;
+                $helper['rang']++;
+                $helped['badge']--;
+                $userManager->updateBadge($helped);
+                $userManager->updateBadge($helper);
+                $userManager->updateRang($helper);
+                $_SESSION['user']['badge'] = $helped['badge'];
             } else {
                 $adverthelp['isValidate'] = 0;
             }
-
+            
             if (count($this->checkAdvertForm()) == 0) {
+
                 $adverthelp['advert_id'] = $_GET['advert_id'];
                 $adverthelp['user_id'] = $_GET['user_id'];
-                $adverthelp['date'] = date('Y , m , H:i:s');
+                $adverthelp['date'] = date('Y , m , d, H:i:s');
                 $adverthelp['id_chat'] = $_GET['id_chat'];
-                $id = $adverthelp['id_chat'];
                 $adverthelp['id_author'] = $_SESSION['user']['id'];
-
-                $adverthelpManager = new AdvertHelpManager();
+                $id = $adverthelp['id_chat'];
+                
                 $adverthelpManager->insert($adverthelp);
+            
                 header('Location:/advertHelp/show/' . $id);
             } else {
                 return $this->twig->render('advertHelp/add.html.twig', [
@@ -90,6 +122,10 @@ class AdvertHelpController extends AbstractController
                 ]);
             }
         }
-        return $this->twig->render('AdvertHelp/add.html.twig');
+
+        return $this->twig->render('AdvertHelp/add.html.twig', [
+            'adverthelp' => $adverthelpManager->selectAllMessageByHelp($_GET['id_chat'])
+         ]);
     }
+
 }

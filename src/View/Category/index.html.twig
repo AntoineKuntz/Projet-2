@@ -8,10 +8,13 @@
     
     {% for category in categories %}
         
-        <li>Nom Catégorie : {{ category.name }}<a href="/category/edit/{{ category.id }}">Modifier</a>
+        <li>Nom Catégorie : {{ category.name }}
+            <a href="/category/edit/{{ category.id }}">Modifier</a>
+            
             <form class="delete" action="/category/delete/{{ category.id }}" method="POST">
                 <button class="btnDelete">Supprimer</button>
             </form>
+            
         </li>
 
     {% endfor %}
