@@ -42,9 +42,7 @@
        {# If SESSION.USER.ADVERT OR ADMIN #}
         {% if session.user.status == '1' or session.user.id == advert.user_id %}
         <div class = "adminBtnContainer">
-              <form class="Edit" action="/Advert/edit/{{advert.id}}" method="POST">
-                 <button class="btnEdit">Modifier</button>
-                 
+              <a href="/Advert/edit/{{ advert.id }}">Modifier</a>
             <form class="delete" action="/Advert/delete/{{advert.id}}" method="POST">
                  <button class="btnDelete">Supprimer</button>
             </form>

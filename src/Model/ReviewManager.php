@@ -76,12 +76,12 @@ class ReviewManager extends AbstractManager
         return $this->pdo->query($query)->fetchAll();
     }
 
-   public function averageByUser($id)
-   {
-    $query = 'SELECT adverthelp.user_id user, adverthelp.id, ROUND(AVG(rate), 1) average, COUNT(*) nbRate 
-    FROM ' . static::TABLE . '
-    JOIN adverthelp ON adverthelp.id = reviews.advertHelp_id
-    WHERE adverthelp.user_id = '. $id ;
-    return $this->pdo->query($query)->fetchAll();
-   }
+    public function averageByUser($id)
+    {
+        $query = 'SELECT adverthelp.user_id user, adverthelp.id, ROUND(AVG(rate), 1) average, COUNT(*) nbRate 
+        FROM ' . static::TABLE . '
+        JOIN adverthelp ON adverthelp.id = reviews.advertHelp_id
+        WHERE adverthelp.user_id = ' . $id;
+        return $this->pdo->query($query)->fetchAll();
+    }
 }

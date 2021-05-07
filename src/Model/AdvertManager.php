@@ -73,7 +73,8 @@ class AdvertManager extends AbstractManager
 
     public function bestAdvert()
     {
-        $query = 'SELECT advert.*, user.firstName, user.lastName, user.avatar, category.name , ROUND(AVG(reviews.rate), 1) rate, COUNT(reviews.rate) nbRate
+        $query = 'SELECT advert.*, user.firstName, user.lastName, user.avatar, category.name ,
+        ROUND(AVG(reviews.rate), 1) rate, COUNT(reviews.rate) nbRate
         FROM ' . static::TABLE .
         ' JOIN user ON user.id = advert.user_id
         JOIN adverthelp ON advert.id = adverthelp.advert_id

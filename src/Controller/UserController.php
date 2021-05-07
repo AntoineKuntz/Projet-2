@@ -103,7 +103,7 @@ class UserController extends AbstractController
         foreach ($help as $data) {
             $group[$data['id_chat']][] = $data;
         }
-        
+
         $this->restrictLogIn();
         return $this->twig->render('User/userShow.html.twig', [
                     'user' => $user,
@@ -181,15 +181,11 @@ class UserController extends AbstractController
             $user = array_map('trim', $_POST);
 
             if (count($this->checkUserForm()) == 0) {
-                
-                if (!isset($_FILES)) {
-                    
+                if (!isset($_FILES['avatar']['name']) || $_FILES['avatar']['name'] == "") {
                     $user['avatar'] = $userManager->selectOneById($id)['avatar'];
                 } else {
-                    
                     $user = $this->uploadAvatar($user);
                 }
-                var_dump($user['avatar']);
                 $userManager->update($user);
                 header('Location: /user/userShow/' . $id);
             } else {

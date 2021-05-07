@@ -90,7 +90,6 @@ class AdvertController extends AbstractController
         $disponibilityManager = new DisponibilityManager();
         $advert = $advertManager->selectOneById($id);
 
-        
         return $this->twig->render('Advert/show.html.twig', [
             'advert' => $advert,
             'user' => $userManager->selectOneById($advert['user_id']),
@@ -148,7 +147,7 @@ class AdvertController extends AbstractController
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // clean $_POST data
-            $advertDatas = array_map('trim', $_POST);
+            $advertDatas = array_map('trim', $advert);
 
             //transmission des nouvelles informations et redirection sur la vue de l'annonce
             if (count($this->checkAdvertForm()) == 0) {
@@ -163,7 +162,7 @@ class AdvertController extends AbstractController
         }
         return $this->twig->render('Advert/edit.html.twig', [
             'advert' => $advert,
-            'disponibility'=> $disponibility,
+            'disponibility' => $disponibility,
             'category' => $category
             ]);
     }
