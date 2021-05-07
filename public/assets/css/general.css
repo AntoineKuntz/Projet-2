@@ -1,15 +1,20 @@
 :root {
     --main-font: 'Economica', 'Advent Pro', 'Barlow', 'Josefin Sans', 'M PLUS Rounded 1c', 'Montserrat', 'Montserrat Alternates', 'Roboto';
-    /*--dark-blue: #367FAE;*/
+    --dark-blue: #367FAE;
     --light-blue: #62B2C8;
+    --salmon: #FFDBB1;
+    --orange: #FF7A18;
+    --yellow: #F5B353;
+    --grey-dark: #292E35;
+    --grey-medium: #928f8f;
+    --grey-light: #bdb9b9;
+    --white: #EBECEE;
+    --yellow-light: #FFF3AD;
     --purple: #8a7fa5;
+    --red-light: #f5705e;
     --pink: #FFCAF2;
-    --salmon: #FFB2B1;
-    --gold: #FFDBB1;
-    --yellow: #FFF3AD;
     --green: #BCFFBC;
     --blue: #A2EDFF;
-    --yellowBtn: #F5B353;
 }
 
 * {
@@ -18,7 +23,7 @@
     box-sizing: border-box;
     font-size: 24px;
     font-family: var(--main-font);
-    color: #444;
+    color: var(--grey-dark);
 }
 
 body {
@@ -32,20 +37,21 @@ ul {
     list-style: none;
 }
 
+li {
+    list-style: none;
+}
+
 a {
     display: block;
     text-decoration: none;
     color: var(--light-blue);
 }
 
-img {
-    max-width: 100%;
-}
-
 h1 {
     position: relative;
-    font-size: 5rem;
+    font-size: 3rem;
     padding-bottom: 5%;
+    color: #4e5052;
 }
 
 h1::after {
@@ -55,7 +61,11 @@ h1::after {
     bottom: 0;
     width: 40%;
     height: 5px;
-    background-color: var(--salmon);
+    background-color: var(--light-blue);
+}
+
+img {
+    max-width: 100%;
 }
 
 
@@ -79,6 +89,7 @@ h1::after {
 
 /* Relief text */
 
+.rightContainer h4,
 h1 {
     text-shadow: 3px 3px 0px rgb(189, 189, 189), -3px -3px 0px rgb(255, 255, 255);
 }
@@ -86,9 +97,18 @@ h1 {
 
 /* Relief BTN */
 
+.btnContainer a,
+.categoryContainer table,
+.btnMessagerie a,
+.btnAsk span,
+.advertHelpAdd .helpInfos img,
+.addAdvert .addForm form,
+.leftContainer .btnAdd,
+.userShow .coord,
+.profilDetails,
+.profilBtn a,
 .nav,
 nav ul li,
-.profilDetails,
 .btnProfil,
 .profilDetails span,
 .profilDetails a,
@@ -100,15 +120,17 @@ input:not([type=submit], [type=file]) {
 
 /* Relief plus prononcer */
 
+input[type=submit],
+.profilBtn button,
 h1::after,
-.edit .outerContainer,
+.rightContainer .outerContainer,
 fieldset,
-.edit .avatar {
+.rightContainer .avatar {
     box-shadow: 2px 5px 3px 0px #b8b8b8, -7px -3px 8px 3px #ffffff;
 }
 
 h1::after,
-.edit .outerContainer,
+.rightContainer .outerContainer,
 .edit fieldset,
 .signIn fieldset {
     margin: 3% 0;
@@ -117,31 +139,53 @@ h1::after,
 
 /* RADIUS */
 
+.infosProfil .icon img,
+.userShow .coord,
 .nav,
 nav ul,
-nav ul li,
 .profilDetails,
 .btnProfil,
 .avatarContainer img,
 .profilDetails span,
 .profilDetails a,
-.adminBtnContainer,
-input[type=submit] {
+.adminBtnContainer {
     border-radius: 10px;
+}
+
+nav ul li {
+    border-radius: 1px;
 }
 
 
 /* Relief creusé */
 
+.btnContainer a:active,
+.categoryContainer th,
+.categoryContainer td,
+.btnMessagerie a:active,
+.helpMessagerie,
+.reviewsContainer,
+.btnAsk span:active,
+.advertHelpAdd .helpInfos h2::after,
+.advertHelpAdd .helpInfos .avatar,
+select,
+textarea,
+.addAdvert .addForm,
+.leftContainer .userAdvert,
+.infosProfil .icon img:active,
+.infos,
+.profilBtn button:active,
+.profilBtn a:active,
+.profilBtn form,
 nav ul,
 nav ul li:active,
 .btnProfil:active,
 .profilDetails a:active,
-.profilDetails .profilCard,
+.profilDetails .card,
 input:not([type=submit], [type=file]):focus,
 input[type=submit]:active,
 input[type=file],
-.edit .innerContainer,
+.rightContainer .innerContainer,
 .formLink {
     box-shadow: inset 2px 2px 2px #bdbdbd, inset -2px -2px 2px #ffffff;
 }
@@ -151,4 +195,23 @@ input[type=file],
 
 .fontLight {
     font-size: .8rem;
+}
+
+
+/* ADMIN BTN */
+
+.adminBtnContainer {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 5%;
+    margin-top: 5%;
+}
+
+.adminBtnContainer button,
+.adminBtnContainer a {
+    color: red;
+    border: 1px solid red;
+    width: 100px;
+    text-align: center;
 }

@@ -83,16 +83,18 @@ class AdvertController extends AbstractController
 
     public function show(int $id): string
     {
+        $this->restrictLogIn();
         $advertManager = new AdvertManager();
         $userManager = new UserManager();
         $reviewManager = new ReviewManager();
         $disponibilityManager = new DisponibilityManager();
         $advert = $advertManager->selectOneById($id);
 
-        $this->restrictLogIn();
+        
         return $this->twig->render('Advert/show.html.twig', [
             'advert' => $advert,
             'user' => $userManager->selectOneById($advert['user_id']),
+            'users' => $userManager->selectAll(),
             'average' => $reviewManager->averageCount(),
             'reviews' => $reviewManager->allReviews(),
             'disponibility' => $disponibilityManager->selectOneById($advert['disponibility_id'])
@@ -136,7 +138,11 @@ class AdvertController extends AbstractController
     public function edit(int $id): string
     {
         $advertManager = new AdvertManager();
+        $disponibilityManager = new DisponibilityManager();
+        $categoryManager = new CategoryManager();
         $advert = $advertManager->selectOneById($id);
+        $disponibility = $disponibilityManager->selectAll();
+        $category = $categoryManager->selectAll();
 
         $this->restrictLogIn();
 
@@ -151,11 +157,15 @@ class AdvertController extends AbstractController
             } else {
                 return $this->twig->render('Advert/edit.html.twig', [
                     'advert' => $advertDatas,
-                    'errors' => $this->checkAdvertForm()
+                    'errors' => $this->checkAdvertForm(),
                 ]);
             }
         }
-        return $this->twig->render('Advert/edit.html.twig', [ 'advert' => $advert]);
+        return $this->twig->render('Advert/edit.html.twig', [
+            'advert' => $advert,
+            'disponibility'=> $disponibility,
+            'category' => $category
+            ]);
     }
     // supression d'une annonce
     public function delete(int $id)

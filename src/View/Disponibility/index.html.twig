@@ -1,18 +1,42 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <h1>Horaire</h1>
-    
-    <a href="/disponibility/add">Ajouter un Horaire</a> <br> 
-    <a href="/User/userAdmin">retour à la page Admin</a><br><br>
-    
-    {% for disponibility in disponibilitys %}
+    <div class="wrapper">
+        <h1>Horaire</h1>
+            <div class="categoryContainer">
+                <div class="btnContainer">
+                    <a href="/disponibility/add">Ajouter un Horaire</a>
+                    <a href="/User/userAdmin">retour à la page Admin</a>
+                </div>
+        
 
-        <li>Nom Horaire : {{ disponibility.timeTable }}<a href="/Disponibility/edit/{{ disponibility.id }}">Editer vos horaires</a>
-            <form class="delete" action="/Disponibility/delete/{{ disponibility.id }}" method="POST">
-                <button>Supprimer</button>
-            </form>
-        </li><br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Horaire</th>
+                            <th colspan="2">Actions</th>
+                        </tr>
+                    </thead>
 
-    {% endfor %}
+                    <tbody>
+                        {% for disponibility in disponibilitys %}
+                            <tr>
+                                <td>{{ disponibility.timeTable }}</td>
+                                    
+                                <td><a class="adminBtn" href="/disponibility/edit/{{ disponibility.id }}">Modifier</a></td>
+                                
+                                <td>
+                                    <form class="delete" action="/disponibility/delete/{{ disponibility.id }}" method="POST">
+                                        <button class="btnDelete adminBtn">Supprimer</button>
+                                    </form>
+                                </td>
+                                    
+                                </li>
+                            </tr>
+                        {% endfor %}
+                    <tbody>
+                </table>
+            </div>
+    </div>
+
 {% endblock %}

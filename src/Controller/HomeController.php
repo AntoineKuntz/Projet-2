@@ -9,6 +9,7 @@
 
 namespace App\Controller;
 
+use App\Model\AdvertManager;
 use App\Model\UserManager;
 
 class HomeController extends AbstractController
@@ -24,10 +25,12 @@ class HomeController extends AbstractController
     public function index()
     {
         $userManger = new UserManager();
+        $advertManager = new AdvertManager();
 
         //var_dump($userManger->bestUser());die();
         return $this->twig->render('Home/index.html.twig', [
-            'bestUser' => $userManger->bestUser()
+            'bestUser' => $userManger->bestUser(),
+            'bestAdvert' => $advertManager->bestAdvert()
         ]);
     }
 }

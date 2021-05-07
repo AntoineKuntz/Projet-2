@@ -26,8 +26,36 @@ input:not([type=submit], [type=file]):focus {
 }
 
 input[type=submit] {
-    color: #62B2C8;
-    box-shadow: 2px 4px 6px #989899, -5px -3px 4px #ffffff, -3px -2px 0px #ffffff;
+    color: var(--purple);
+}
+
+input[type=submit]:hover {
+    cursor: pointer;
+}
+
+textarea {
+    width: 100%;
+    border: none;
+    overflow: auto;
+    outline: none;
+    resize: none;
+    background: #F5F5F5;
+}
+
+textarea:focus {
+    background: var(--white);
+}
+
+select {
+    padding: 10px;
+    border-radius: 20px;
+    color: var(--purple);
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -ms-appearance: none;
+    outline: none;
 }
 
 a.link {
@@ -101,7 +129,6 @@ fieldset,
     padding: 2% 1%;
     text-align: center;
     background: #efefef;
-    border: 1px solid rgba(243, 198, 165);
 }
 
 legend {
@@ -130,41 +157,4 @@ label {
 .edit {
     display: flex;
     justify-content: space-around;
-}
-
-.leftSide {
-    height: 90vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-}
-
-.edit .outerContainer {
-    position: relative;
-    width: 25vw;
-    height: 25vw;
-    margin-top: 20%;
-}
-
-.edit .innerContainer {
-    position: relative;
-    padding: 10px;
-    width: 25vw;
-    height: 25vw;
-    padding: 1%;
-}
-
-.edit .outerContainer,
-.edit .innerContainer,
-.edit .avatar {
-    border-radius: 100%;
-}
-
-.edit .avatar {
-    position: absolute;
-    padding: 10px;
-    width: 90%;
-    height: 90%;
-    top: 5%;
-    left: 5%;
 }

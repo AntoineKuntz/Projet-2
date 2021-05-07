@@ -1,0 +1,135 @@
+    .adminContainer {
+        display: flex;
+    }
+    
+    .adminContainer .category {
+        width: 30%;
+    }
+    
+    .adminContainer .category a {
+        display: inline-block;
+        position: relative;
+        font-size: 2rem;
+        transition: all .2s linear;
+    }
+    
+    .adminContainer .category a::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 48%;
+        width: 100%;
+        height: 4px;
+        transform: scaleX(0);
+        transform-origin: left;
+        background: var(--purple);
+        transition: all .2s ease-in;
+    }
+    
+    .adminContainer .category a:hover {
+        color: var(--purple);
+    }
+    
+    .adminContainer .category a:hover:before {
+        transform: scaleX(1);
+    }
+    
+    .cluberLang path {
+        stroke-width: 5px;
+        /*fill: var(--grey-medium);*/
+        stroke-dasharray: 47021px;
+        stroke-dashoffset: 47021px;
+        animation: animSvg 10s ease forwards;
+    }
+    /*        CATEGORY         */
+    
+    .addDispoContainer,
+    .categoryContainer {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .btnContainer {
+        width: 20%
+    }
+    
+    .btnContainer a {
+        margin: 20% 0;
+        padding: 5% 2%;
+    }
+    
+    .categoryContainer th {
+        padding: 2%;
+        font-size: 1.5rem;
+        color: var(--grey-medium);
+    }
+    
+    .categoryContainer table {
+        width: 60%
+    }
+    
+    .categoryContainer td {
+        padding: 5%;
+        margin: 2%;
+    }
+    
+    .adminBtn {
+        color: red;
+        border: 1px solid red;
+        width: 100px;
+        text-align: center;
+        margin: 0 auto;
+    }
+    /* ------------------------------------- ADD CATEGORY ------------------------------------- */
+    
+    .addDispoContainer div,
+    .addCategoryContainer div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 70vh;
+    }
+    
+    .addDispoContainer a,
+    .addDispoContainer form input,
+    .addCategoryContainer a,
+    .addCategoryContainer form input {
+        margin: 3%;
+    }
+    
+    .logoOurs,
+    .squelette {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        z-index: -1;
+    }
+    
+    .logoOurs path,
+    .squelette path {
+        fill: none;
+        stroke-width: 15;
+        stroke-dasharray: 13361px;
+        stroke-dashoffset: 13361px;
+    }
+    
+    .squelette path {
+        animation: squelette 5s ease forwards;
+    }
+    
+    .logoOurs path {
+        animation: svg 5s ease forwards;
+    }
+    
+    @keyframes squelette {
+        to {
+            stroke-dashoffset: 0;
+        }
+    }
+    
+    @keyframes svg {
+        to {
+            stroke-dashoffset: 0;
+            fill: var(--grey-light)
+        }
+    }

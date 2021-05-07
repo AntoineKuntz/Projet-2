@@ -1,0 +1,167 @@
+.advertHelpAdd {
+    display: flex;
+    height: 90vh;
+    justify-content: space-between;
+}
+
+.advertHelpAdd .helpInfos {
+    width: 30vw;
+    position: relative;
+    background-color: rgba(138, 127, 165, 0.702);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.advertHelpAdd .helpInfos h2 {
+    position: relative;
+    color: var(--white);
+    font-size: 3rem;
+    padding: 10% 0;
+    background: #aba1bd;
+    text-shadow: inset 20px 20px 60px #9189a1, inset -20px -20px 60px #c5b9d9;
+}
+
+.advertHelpAdd .helpInfos h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 20px;
+    width: 80%;
+    background: var(--white);
+}
+
+.advertHelpAdd .helpInfos .description,
+.advertHelpAdd .helpInfos .dispo {
+    padding: 5%;
+    color: var(--white);
+    font-size: 1.2rem;
+}
+
+.advertHelpAdd .helpInfos h3 {
+    position: absolute;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    top: 50%;
+    right: 100%;
+    font-size: 3rem;
+    color: rgba(138, 127, 165, .7);
+}
+
+.advertHelpAdd .helpInfos .avatar {
+    padding: 25px;
+    width: 50%;
+    background-color: var(--white);
+}
+
+.advertHelpAdd .message {
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.message textarea {
+    height: 20vh;
+}
+
+
+/* ----------------------------------------- AdvertHelp SHOW ----------------------------------------- */
+
+.helpShow {
+    display: flex;
+    width: 100%;
+}
+
+.helpShow .helpMessagerie {
+    width: 40%;
+    height: 70vh;
+    padding: 50px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+/* MESSAGE  */
+
+.reviewMessage p:nth-child(2),
+.helpMessagerie .message p:nth-child(2) {
+    padding: 10px;
+    border-radius: 20px;
+    width: 60%;
+}
+
+.helpMessagerie .myMessage p:nth-child(2) {
+    background-color: var(--green);
+}
+
+.helpMessagerie .message {
+    display: flex;
+    flex-direction: column;
+}
+
+.helpMessagerie .helperMessage {
+    align-items: flex-end;
+}
+
+.helpMessagerie .myMessage {
+    align-items: flex-start;
+}
+
+.helpMessagerie .helperMessage p:nth-child(2) {
+    background-color: var(--grey-light);
+}
+
+.reviewMessage p:nth-child(1),
+.helpMessagerie .myMessage span {
+    font-size: .8rem;
+    color: var(--grey-medium);
+}
+
+
+/* END MESSAGE */
+
+.reviewMessage {
+    position: absolute;
+    top: -120%;
+    right: 0;
+}
+
+.reviewMessage p:nth-child(2) {
+    background: var(--yellow-light);
+    width: 100%;
+}
+
+.btnMessagerie {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.btnMessagerie a {
+    padding: 5px;
+}
+
+.helpShow .bottle {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+}
+
+.helpShow .bottle path {
+    stroke-width: 10;
+    stroke-dasharray: 100575px;
+    stroke-dashoffset: 100575px;
+    animation: anim 5s ease forwards;
+}
+
+@keyframes anim {
+    to {
+        stroke-dashoffset: 0;
+    }
+}

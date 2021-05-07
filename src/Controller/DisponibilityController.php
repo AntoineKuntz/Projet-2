@@ -24,8 +24,6 @@ class DisponibilityController extends AbstractController
             $disponibilityManager->update($disponibility);
             header('Location:/Disponibility/index');
         }
-
-        $this->restrictAdmin();
         return $this->twig->render('Disponibility/edit.html.twig', ['disponibility' => $disponibility]);
     }
 

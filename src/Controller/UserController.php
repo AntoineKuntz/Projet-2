@@ -8,6 +8,8 @@ use App\Model\AdvertHelpManager;
 use App\Controller\CheckForm;
 use App\Controller\AuthController;
 use App\Model\AuthManager;
+use App\Model\CategoryManager;
+use App\Model\DisponibilityManager;
 use App\Model\ReviewManager;
 
 class UserController extends AbstractController
@@ -85,21 +87,31 @@ class UserController extends AbstractController
         $userManager = new UserManager();
         $advertManager = new AdvertManager();
         $helpManager = new AdvertHelpManager();
+        $reviewsManager = new ReviewManager();
+        $disponibilityManager = new DisponibilityManager();
+        $categoryManager = new CategoryManager();
+
         $user = $userManager->selectOneById($id);
         $advert = $advertManager->selectByUserId($id);
         $help = $helpManager->selectAllHelpByUser($id);
+        $rate = $reviewsManager->averageByUser($id);
+        $disponibility = $disponibilityManager->selectAll();
+        $category = $categoryManager->selectAll();
 
         // GROUPER LES HELP PAR ID_CHAT
         $group = array();
         foreach ($help as $data) {
             $group[$data['id_chat']][] = $data;
         }
-
+        
         $this->restrictLogIn();
         return $this->twig->render('User/userShow.html.twig', [
                     'user' => $user,
                     'advert' => $advert,
-                    'help' => $group
+                    'help' => $group,
+                    'rate' => $rate,
+                    'category' => $category,
+                    'dispo' => $disponibility
         ]);
     }
 
@@ -161,18 +173,23 @@ class UserController extends AbstractController
     public function edit(int $id): string
     {
         $userManager = new UserManager();
+        $reviewsManager = new ReviewManager();
         $user = $userManager->selectOneById($id);
+        $rate = $reviewsManager->averageByUser($id);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user = array_map('trim', $_POST);
 
             if (count($this->checkUserForm()) == 0) {
-                if (!isset($user['avatar'])) {
+                
+                if (!isset($_FILES)) {
+                    
                     $user['avatar'] = $userManager->selectOneById($id)['avatar'];
                 } else {
+                    
                     $user = $this->uploadAvatar($user);
                 }
-
+                var_dump($user['avatar']);
                 $userManager->update($user);
                 header('Location: /user/userShow/' . $id);
             } else {
@@ -191,6 +208,7 @@ class UserController extends AbstractController
         $this->restrictLogIn();
         return $this->twig->render('User/edit.html.twig', [
             'user' => $user,
+            'rate' => $rate
         ]);
     }
 

@@ -1,24 +1,158 @@
-.home .helper {
+.home .bestAdvert {
     display: flex;
     height: 90vh;
     align-items: center;
     justify-content: center;
 }
 
-.text {
+.home .bestAdvert .text {
+    align-self: flex-start;
+    height: 100%;
+    display: grid;
+    grid-template-areas: repeat(3, 1fr);
     width: 50%;
+}
+
+.home .text p {
+    font-size: 1.2rem;
+    color: var(--grey-medium);
+}
+
+.home .bestAdvert .text p {
+    padding: 5% 10%;
+}
+
+
+/* SCROLL + BARRE */
+
+.down {
+    position: relative;
+}
+
+.down div {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 5px;
+    height: 130%;
+    background: var(--purple);
 }
 
 .round {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.slider {
+    display: flex;
     align-items: center;
+}
+
+.roundBackround {
     width: 700px;
     height: 700px;
     border-radius: 100%;
-    background: linear-gradient(90deg, #FFDBB1, #FF7A18);
+    background: linear-gradient(90deg, var(--salmon), var(--orange));
 }
 
-.round .profilCard {
-    box-shadow: -1rem 0 3rem #000;
-    margin: 0;
+.bestAdvert .card .body {
+    border-color: var(--light-blue);
+}
+
+
+/* ---------------------------------------- SECTION Helper ---------------------------------------- */
+
+.bestHelper {
+    height: 100vh;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bestHelper .text h2 {
+    font-size: 3rem;
+    color: var(--purple);
+    padding: 5% 0;
+}
+
+.home .bestHelper .text p:nth-child(2) {
+    text-align: end;
+    margin-bottom: 30px;
+}
+
+.bestHelper,
+.cardList {
+    display: flex;
+}
+
+.bestHelper .down {
+    width: 50%;
+}
+
+.cardList {
+    height: 50%;
+    transform-style: preserve-3d;
+    perspective: 700px;
+}
+
+.cardList .card {
+    transform-style: preserve-3d;
+    transition: all .5s;
+}
+
+.cardList:hover .card {
+    transform: rotateY(25deg);
+}
+
+.cardList .card:hover~.card {
+    transform: rotateY(-25deg);
+}
+
+.cardList .card:hover {
+    transform: rotateY(0deg) scale(1.15);
+    z-index: 1;
+    box-shadow: 0 25px 40px rgba(0, 0, 0, 0.5);
+}
+
+
+/* ---------------------------------------- FOOTER ---------------------------------------- */
+
+footer.pageFooter {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+footer.pageFooter img.skyline {
+    margin-bottom: -10px;
+    filter: invert(17%) sepia(7%) saturate(1137%) hue-rotate(169deg) brightness(90%) contrast(92%);
+}
+
+footer.pageFooter .footerLink {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 10px;
+    height: 20vh;
+    background-color: #292F35;
+    text-align: center;
+}
+
+footer.pageFooter .footerLink h4 {
+    color: var(--white);
+    padding: 10px 0;
+}
+
+footer.pageFooter .footerLink a {
+    color: var(--salmon);
+}
+
+footer.pageFooter .footerLink .reseaux ul {
+    display: flex;
+    justify-content: center;
+}
+
+footer.pageFooter .footerLink .reseaux ul img {
+    padding: 20%;
 }

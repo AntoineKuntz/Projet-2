@@ -70,4 +70,19 @@ class AdvertManager extends AbstractManager
 
         return $statement->fetchAll();
     }
+
+    public function bestAdvert()
+    {
+        $query = 'SELECT advert.*, user.firstName, user.lastName, user.avatar, category.name , ROUND(AVG(reviews.rate), 1) rate, COUNT(reviews.rate) nbRate
+        FROM ' . static::TABLE .
+        ' JOIN user ON user.id = advert.user_id
+        JOIN adverthelp ON advert.id = adverthelp.advert_id
+        JOIN reviews ON reviews.advertHelp_id = adverthelp.id
+        JOIN category ON advert.category_id = category.id
+        GROUP by advert.id
+        ORDER BY nbRate DESC, rate DESC
+        LIMIT 5';
+
+        return $this->pdo->query($query)->fetchAll();
+    }
 }

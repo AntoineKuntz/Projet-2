@@ -2,52 +2,135 @@
 
 {% block content %}
 
-        <div class="home wrapper helpers">
-                <section class="helper">
+        <div class="home wrapper">
+                
+
+                <section class="bestAdvert advert">
                         <div class="text">
-                                <h2>Hello {% if session %} {{session.user.userLastName}} <br> {{session.user.userFirstName}}{% else %}Helper{% endif %} !</h2>
+                                <div>
+                                        <h1>Hello {% if session %}{{session.user.userFirstName}}{% else %}Helper{% endif %} !</h1> 
+                                </div>
+
+                                <div>
+                                        <p class="homeText1">
+                                                Trouvez de l'aide grâce à Stras’help, le site d’annonces d’échange entre particulier 100% gratuit.
+                                        </p>  
+                                        <p class="homeText2">
+                                                Déposez une annonce en toute simplicité pour proposer, ou promouvoir vos services.
+                                        </p>
+                                </div>
+                                <div class="down">
+                                        <div class="line"></div>
+                                </div>
                         </div>
-                        
-                        <div class="cardList">
-                                <div class="round">
-                                        {% for user in bestUser %}
-                                                <article class="profilCard">
-                            
-                                                        <div class="header">
-                                                                <div class="avatarContainer">
-                                                                        <img class="usersAvatar" src="/assets/images/membres/avatars/{{user.avatar}}">
-                                                                </div>
-                                                                <h4>{{ user.lastName }} {{ user.firstName }}</h4> 
-                                                        </div>
-                                                                
+                        <div class="round roundBackround">
+                                <div class="slider ">
+                                        {% for advert in bestAdvert %}
+                                                <article class="card">
+                                                        <header>
+                                                                <a href="/Advert/show/{{advert.id}}"><h4>{{ advert.title }}</h4></a> 
+                                                                <p>{{advert.name}}</p>          
+                                                        </header>
+                                                                        
                                                         <div class="body">     
                                                                 <div class="adress">
-                                                                        <p class="fontLight"> {{ user.adresseNumber}} {{user.adresseStreet}} <br> {{ user.adressePostal}} {{user.adresseCity}}  </p>
+                                                                        <p class="fontLight"> {{ advert.description|slice(0,50) ~'...'}} </p>
+                                                                </div>
+                                                                <div class="review">
+                                                                        <p>Note : {{advert.rate}}/5 </p>
+                                                                        <p><span>{{advert.nbRate}} avis</span></p>
                                                                 </div>
 
-                                                                <p>Note : {{user.rate}}/5 </p>  
-                                                                <p class="rang"> Rang : {{ user.rang }} </p>
                                                         </div>
-                                                                
-                                                        <div class="footer">
-                                                                <a href="userShow/{{ user.id }}" class="btn">Profil</a>
                                                                         
-                                                                {% if session.user.status == '1' %}
-                                                                        <div class="adminBtnContainer">
-                                                                                <a href="/user/edit/{{ user.id }}">Edit</a>
-                                                                                <form class="delete" action="/user/delete/{{user.id}}" method="POST">
-                                                                                        <button class="btnDelete">Delete</button>
-                                                                                </form>
-                                                                        </div>
-                                                                {% endif %}
-                                                        </div>
-                                                </article>
+                                                        <footer class="cardFooter">        
+                                                                <img src="/assets/images/membres/avatars/{{advert.avatar}}" alt="helper avatar">
+                                                                <p>{{advert.firstName}} {{advert.lastName}}</p>                       
+                                                        </footer>      
+                                                </article>    
                                         {% endfor %}
                                 </div>
                         </div>
                 </section>
+
+
+                <section class="bestHelper">
+
+                        <div class="text">
+
+                                <h2 class="secondTitle">Un système de classement intuitif !</h2>
+                                                
+                                <p class="homeText3">
+                                        Sur Stras’help, nous avons mis en place un système de points pour récompenser tous vos efforts ! 
+                                </p>
+                                <p class="homeText4">
+                                        Accumulez des points à chaque service rendu et ou proposé mené à bien, progressez dans le classement mensuel des meilleurs helpers pour remporter avantages et autres récompenses comme des cartes cadeau, voyages et bien plus !
+                                </p>
+                        </div>
+
+                         <div class="cardList">
+                                {% for user in bestUser %}
+                                        
+                                         <article class="card">
+                            
+                                                <header>
+                                                        <div class="avatarContainer">
+                                                                <img class="usersAvatar" src="/assets/images/membres/avatars/{{user.avatar}}">
+                                                        </div>
+                                                        <h4>{{ user.lastName }} {{ user.firstName }}</h4> 
+                                                </header>
+                                                                
+                                                <div class="body">     
+                                                        <div class="adress">
+                                                                <p class="fontLight"> {{ user.adresseNumber}} {{user.adresseStreet}} <br> {{ user.adressePostal}} {{user.adresseCity}}  </p>
+                                                        </div>
+
+                                                        <p>Note : {{user.rate}}/5 </p>  
+                                                        <p class="rang"> Rang : {{ user.rang }} </p>
+                                                </div>
+                                                                
+                                                <footer class="cardFooter">
+                                                        <a href="/user/userShow/{{ user.id }}" class="btn">Profil</a>                           
+                                                </footer>
+                                        </article>
+                                      
+                                {% endfor %}
+                        </div>
+                </section>
+
+                
         </div>
         
-        
+        <footer class="pageFooter">
+                        
+                         <img class="skyline" src="/assets/images/img/footer.svg" alt="strasbourg skyline"/>
+                      
+                        <div class="footerLink">
+                                <div>
+                                        <h4>Nos partenaires</h4>
+                                        <ul>
+                                                <li><a href="#">StrassZik</a></li>
+                                                <li><a href="#">StrassBook</a></li>
+                                                <li><a href="#">StrassCook</a></li>
+                                        </ul>
+                                </div>
+                                <div class="reseaux">
+                                        <h4>Nous Retrouver</h4>
+                                        <ul>
+                                                <li><a href="#"><img src="assets/images/img/facebook.png" alt="logo facebook"></a></li>
+                                                <li><a href="#"><img src="assets/images/img/instagram.png" alt="logo instagram"></a></li>
+                                                <li><a href="#"><img src="assets/images/img/twitter.png" alt="logo twitter"></a></li>
+                                        </ul>
+                                </div>
+                                <div>
+                                        <h4>Qui somme nous ?</h4>
+
+                                        <p class="fontLight">
+                                              Sortant de la même université, nous sommes 3 étudiants fraichement diplômés en sociologie. Durant nos études, nous avons compris l’importance de l’entraide entre nous et, plus on est de fous, plus on rit n’est-ce pas ? Avec Stras’help, nous voulons proposer une plateforme d’échange d’aides, et tout ça gratuitement, avec la bonne humeur en prime !
+                                        </p>
+                                        
+                                </div>
+                        </div>
+                </footer>
         
 {% endblock %}

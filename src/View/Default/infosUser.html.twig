@@ -1,14 +1,14 @@
 <aside class="profilDetails">      
     
-    <div class="profilCard">    
+    <div class="card">    
         
-        <div class="header">
+        <header>
             <div class="avatarContainer">
                 <img class="usersAvatar" src="/assets/images/membres/avatars/{{session.user.avatar}}">
             </div>
             <h4>{{ session.user.userLastName }} {{ session.user.userFirstName }}</h4>
             <p class="fontLight">{{ session.user.mail }} </p>
-        </div>
+        </header>
         
         <div class="body">            
             <p class="rang">Rang {{ session.user.rang }} </p>

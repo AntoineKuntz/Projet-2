@@ -51,7 +51,7 @@ abstract class AbstractController
     public function restrictLogIn()
     {
         if (!isset($_SESSION['user'])) {
-            header('Location:../auth/logIn');
+            header('Location:/auth/logIn');
         };
     }
 }

@@ -1,3 +1,162 @@
+.advertList {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.allAdvert .card {
+    padding: 15%;
+}
+
+.adver.allAdvert .card:hover~.card {
+    transform: translateX(50px);
+}
+
+.advert.allAdvert .card:not(:first-child) {
+    margin-left: -50px;
+}
+
 .allAdvert a {
     display: inline-block;
+}
+
+
+/* -------------------------------------- SHOW ------------------------------- 
+
+.advertShow {
+    height: 90vh;
+    position: relative;
+}
+
+.advertShow .container {
+    display: flex;
+    justify-content: space-around;
+    height: 60vh;
+}
+
+.advertShow .rate {
+    color: var(--yellow);
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.advertShow .rate span {
+    font-size: .8rem;
+}*/
+
+
+/* Advert Container 
+
+.advertShow .advertContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.btnAsk a {
+    position: relative;
+}
+
+.btnAsk span {
+    color: var(--blue-light);
+    padding: 10px;
+}
+
+.btnAsk a::after {
+    content: '';
+    position: absolute;
+    left: 40%;
+    top: 50%;
+    width: 20%;
+    height: 2px;
+    background-color: var(--light-blue);
+}
+*/
+
+
+/* Review Container 
+
+.reviewsContainer {
+    padding: 2% 5%;
+    width: 30%;
+    overflow: scroll;
+}
+
+.reviewsContainer h2 {
+    font-size: 1.5rem;
+    margin-bottom: 50px;
+}
+
+.reviewsContainer .review {
+    margin-bottom: 10%;
+    padding-bottom: 10%;
+    border-bottom: 1px dashed var(--purple);
+}
+
+.reviewsContainer .reviews .reviewer {
+    display: flex;
+    align-items: flex-end;
+}
+
+.reviewsContainer .reviews .reviewer img {
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+}
+
+.reviewsContainer .reviews .comment {
+    font-size: 1.2rem;
+}*/
+
+
+/* ANTOINE CSS */
+
+.advert .helper,
+.advert .description,
+.advert .action {
+    text-align: center;
+}
+
+.advert .title {
+    margin-top: 10%;
+}
+
+.advert .description {
+    margin-top: 2%;
+}
+
+.advert .action {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3%;
+    margin-top: 2%;
+}
+
+.advert .message {
+    position: relative;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #A8DDFD;
+    width: 30%;
+    text-align: left;
+    font: 400 .9em 'Open Sans', sans-serif;
+    border: 1px solid #97C6E3;
+    border-radius: 10px;
+}
+
+.advert .avatar {
+    border-radius: 100%;
+    height: 240px;
+    width: 240px;
+    margin-bottom: 2%;
+    margin-top: 2%;
+}
+
+.btnAsk {
+    text-align: center;
+}
+
+.btnAsk span {
+    color: var(--blue-light);
+    padding: 10px;
 }

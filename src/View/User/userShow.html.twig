@@ -1,84 +1,133 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-
+                
     <div class="wrapper userShow">
-        <div class="rightContainer">
-            <h1>{{ user.lastname }} {{ user.firstname }}</h1>
-
-            <div class="avatarCont">
-                <img src="/assets/images/membres/avatars/{{user.avatar}}"/>
-            </div>
-
-            <div>
-                <h4>Rang : <span>{{ user.rang }}</span></h4>
-                <div>
-                    <h4>Localité : </h4>
-                    <p> {{user.adresseStreet}}</p>
-                    <p> {{ user.adressePostal}} {{user.adresseCity}} </P>
-                </div>
-                
-                <div>
-                    <h4>Contact :</h4>
-                    {{ user.mail }} 
-                </div>
-            <p>  </p>
-            <p><img class="jeton" src="/assets/images/img/jeton1.png"> X {{ user.badge }} </p>
-            </div> 
-            {% if session.user.id == user.id %}
-                <a href="/user/edit/{{ session.user.id }}">Modifier Profil</a>
-                <a href="/Advert/add">Ajoute une annonce</a>
-                <form class="delete" action="/user/deleteSelf/{{user.id}}" method="POST">
-                    <button class="btnDelete">Supprimer</button>
-                </form>
-            {% endif %}
-        </div>
        
-        <div class="leftContainer">        
-
-            <div>
-                <h2>Mes annonces</h2>
+        <div class="profilContainer">
+            
+            <div class="rightContainer">
                 
-                {% for key in advert %} 
-                        <div>
-                            <a href="/Advert/show/{{ key.id }}"> {{ key.title }}</a>
-                            <p> {{key.description}} </p>
+                <h1>{{ user.lastName }} {{ user.firstName }}</h1>
+
+                <div class="reputation">
+                    <div class="outerContainer">
+                        <div class="innerContainer">
+                            <img class="avatar" src="/assets/images/membres/avatars/{{user.avatar}}" alt="photo profil"/>
                         </div>
-                {% endfor %}
+                    </div>
 
-                {% if advert is empty %}
-                    <p>Acunne annonce disponible.</p>
-                {% endif %}   
+                    <p class="rank">Rang : {{ user.rang }}</p>
+                    <p class="rate">{{ rate|last.average }}/5 <span>pour {{ rate|last.nbRate}} avis</span></p>
+                </div>
+                
+                {% if session.user.id == user.id %}
+                    <div class="profilBtn">
+                        <span><a href="/user/edit/{{ session.user.id }}">Modifier Profil</a></span>
+                        <form class="delete" action="/user/deleteSelf/{{user.id}}" method="POST">
+                            <button class="btnDelete">Supprimer</button>
+                        </form>
+                    </div>
+                {% endif %}
             </div>
+        
+            <div class="infosProfil">
+                    <div class="coord">
+                        <div class="icon"> 
+                            <img src="/assets/images/img/home.png" alt="icon home">
+                        </div>
+                        <div class="infos">
+                                <p> {{user.adresseStreet}}</p>
+                                <p> {{ user.adressePostal}} {{user.adresseCity}} </P>
+                        </div>
+                    </div>
 
-            {# USER PROFIL HELPS IN WAIT #}
-            {% if session.user.id == user.id %}
-                <div>
-                    <h2>Les Helps en attentes :</h2>
+                    <div class="coord">
+                        <div class="icon"> 
+                            <img src="/assets/images/img/mobile.png" alt="icon phone">
+                        </div>
+                        <div class="infos">
+                            <p>{{user.phoneNumber}}</p>
+                        </div>
+                    </div>
 
-                    <div>
-                        {% for key in help %}     
-                            {% if key.0.helper == session.user.id and key|last.isValidate != "1" %}
-                                <a href="/Adverthelp/show/{{key.0.id_chat}}">{{ key.0.title }}</a>
-                            {% endif %}
+                    <div class="coord">
+                        <div class="icon"> 
+                            <img src="/assets/images/img/at.png" alt="icon mail">
+                        </div>
+                        <div class="infos">
+                            <p>{{ user.mail }} </p>
+                        </div>
+                    </div>
+            </div>
+            
+            <div class="leftContainer">        
+
+                <div class="userAdvert ">
+                    <h2>Mes annonces</h2>
+                    <div class="userAdvertList">
+                        {% for key in advert %} 
+                            <div class="advertCard ">
+                                <div class="advertCardInner card">   
+                                    <header>
+                                        <a href="/Advert/show/{{ key.id }}"> {{ key.title }}</a>
+                                        
+                                        {# DISPO #}
+                                        {% for index in dispo %} 
+                                            {% if index.id == key.disponibility_id %}
+                                                <p class="dispo fontLight">Dispo : {{index.timeTable}}</p>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </header>
+                                    {# DESCRIPTION #}
+                                    <p class="description"> {{key.description}} </p>
+                                    
+                                    {# CATEGORY #}
+                                    {% for index in category %} 
+                                        {% if index.id == key.category_id %}
+                                            <p class="category">{{index.name}}</p>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
                         {% endfor %}
                     </div>
+                    {% if advert is empty %}
+                        <p>Acunne annonce disponible.</p>
+                    {% endif %}   
+
+                    {% if session.user.id == user.id %}
+                        <a class="btnAdd" href="/Advert/add">Ajouter annonce</a>
+                    {% endif %} 
                 </div>
 
-                <div>
-                    <h2>Mes demande de Hepls :</h2>
-                    
+                {# USER PROFIL HELPS IN WAIT #}
+                {% if session.user.id == user.id %}
                     <div>
-                        {% for key in help %}
-                            {% if key.0.helper != session.user.id and key.0.id_author == session.user.id and key.0.rate == null %}
-                                <a href="/Adverthelp/show/{{key.0.id_chat}}">{{ key.0.title }}</a>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
-            {% endif %}
+                        <h2>Les Helps en attentes :</h2>
 
-        </div>
+                        <div>
+                            {% for key in help %}     
+                                {% if key.0.helper == session.user.id and key|last.isValidate != "1" %}
+                                    <a href="/Adverthelp/show/{{key.0.id_chat}}">{{ key.0.title }}</a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div>
+                        <h2>Mes demande de Hepls :</h2>
+                        
+                        <div>
+                            {% for key in help %}
+                                {% if key.0.helper != session.user.id and key.0.id_author == session.user.id and key.0.rate == null %}
+                                    <a href="/Adverthelp/show/{{key.0.id_chat}}">{{ key.0.title }}</a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
 
     <div>
 

@@ -65,7 +65,7 @@ class UserManager extends AbstractManager
     public function searchByUser(string $term): array
     {
         $statement = $this->pdo->prepare("SELECT * FROM " . static::TABLE .
-        " JOIN advert ON user.id = advert.user_id WHERE lastName LIKE '%" . $term . "%'");
+        " JOIN advert ON user.id = advert.user_id WHERE lastName LIKE '" . $term . "%'");
 
         $statement->bindValue('term', $term, \PDO::PARAM_STR);
         $statement->execute();
@@ -105,7 +105,8 @@ class UserManager extends AbstractManager
         JOIN advert ON advert.user_id = user.id
         JOIN reviews ON reviews.advertHelp_id = adverthelp.id
         GROUP by user.id
-        ORDER BY rate DESC';
+        ORDER BY rate DESC
+        LIMIT 5';
 
         return $this->pdo->query($query)->fetchAll();
     }

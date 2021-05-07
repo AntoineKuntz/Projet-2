@@ -6,6 +6,8 @@ namespace App\Controller;
 
 use App\Model\AdvertHelpManager;
 use App\Controller\CheckForm;
+use App\Model\AdvertManager;
+use App\Model\DisponibilityManager;
 use App\Model\UserManager;
 use App\Model\ReviewManager;
 
@@ -40,6 +42,13 @@ class AdvertHelpController extends AbstractController
     {
         $this->restrictLogIn();
 
+        $userManager = new UserManager();
+        $advertManager = new AdvertManager();
+        $disponibilityManager = new DisponibilityManager();
+        $user = $userManager->selectOneById($_GET['user_id']);
+        $advert = $advertManager->selectOneById($_GET['advert_id']);
+        $disponibility = $disponibilityManager->selectOneById($advert['disponibility_id']);
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $adverthelp = array_map('trim', $_POST);
 
@@ -69,13 +78,20 @@ class AdvertHelpController extends AbstractController
             }
         }
 
-        return $this->twig->render('AdvertHelp/add.html.twig');
+        return $this->twig->render('AdvertHelp/add.html.twig', [
+            'user' => $user,
+            'advert' => $advert,
+            'disponibility' => $disponibility
+        ]);
     }
 
     public function respond(): string
     {
         $adverthelpManager = new AdvertHelpManager();
+        $advertManager = new AdvertManager();
+        $disponibilityManager = new DisponibilityManager();
         $userManager = new UserManager();
+        $advert = $advertManager->selectOneById($_GET['advert_id']);
 
         $this->restrictLogIn();
 
@@ -119,7 +135,10 @@ class AdvertHelpController extends AbstractController
         }
 
         return $this->twig->render('AdvertHelp/add.html.twig', [
-            'adverthelp' => $adverthelpManager->selectAllMessageByHelp($_GET['id_chat'])
+            'adverthelp' => $adverthelpManager->selectAllMessageByHelp($_GET['id_chat']),
+            'advert' => $advert,
+            'user' => $userManager->selectOneById($_GET['user_id']),
+            'disponibility' => $disponibilityManager->selectOneById($advert['disponibility_id'])
          ]);
     }
 }

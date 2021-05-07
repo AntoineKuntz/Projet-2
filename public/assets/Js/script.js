@@ -42,6 +42,19 @@ if(document.querySelector('form.delete')){
                  e.target.submit();
             }
         })
-    })
+    })   
+}
+
+
+/* BTN PROFIL SHOW COORD */
+
+if(document.querySelector('.coord .icon')){
     
+    let coordBtn = document.querySelectorAll('.coord .icon');
+    
+    coordBtn.forEach(btn =>{
+        btn.addEventListener('click', ()=>{
+            btn.parentNode.classList.toggle('active');
+        })
+    })
 }
