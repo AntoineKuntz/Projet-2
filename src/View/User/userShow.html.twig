@@ -1,5 +1,10 @@
 {% extends 'layout.html.twig' %}
 
+{% block stylesheet %}        
+        <link rel="stylesheet" href="/assets/css/pages/userShow.css">
+        <link rel="stylesheet" href="/assets/css/cards/card.css">
+{% endblock %}
+
 {% block content %}
                 
     <div class="wrapper userShow">
@@ -120,7 +125,8 @@
                         
                         <div>
                             {% for key in help %}
-                                {% if key.0.helper != session.user.id and key.0.id_author == session.user.id and key.0.rate == null %}
+                            
+                                {% if key.0.helper != session.user.id and key.0.id_author == session.user.id and key|last.rate == null %}
                                     <a href="/Adverthelp/show/{{key.0.id_chat}}">{{ key.0.title }}</a>
                                 {% endif %}
                             {% endfor %}

@@ -1,5 +1,10 @@
 {% extends 'layout.html.twig' %}
 
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/cards/card.css">
+    <link rel="stylesheet" href="/assets/css/pages/allUser.css">
+{% endblock %}
+
 {% block content %}
    
     <div class="wrapper helpers">
@@ -46,4 +51,8 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" src="/assets/Js/vanilla-tilt.js"></script>
 {% endblock %}

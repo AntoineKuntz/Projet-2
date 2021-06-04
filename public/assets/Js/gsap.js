@@ -36,6 +36,6 @@ gsap.from('.homeText4', {
     x:220,
     scrollTrigger :{
     trigger: '.homeText4',
-    start: "top 75%",
+    start: "top 65%",
 }
 });}

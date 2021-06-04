@@ -1,5 +1,10 @@
 {% extends 'layout.html.twig' %}
 
+{% block stylesheet %}        
+        <link rel="stylesheet" href="/assets/css/pages/admin.css">
+        <link rel="stylesheet" href="/assets/css/components/form.css">
+{% endblock %}
+
 {% block content %}
     <h1>Modification de la catégorie : </h1> <br>
     {{ category.name }}

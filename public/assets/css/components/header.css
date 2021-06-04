@@ -7,13 +7,15 @@
  }
  
  .logo {
-     height: 100%;
+     width: 60px;
+     height: 60px;
      display: flex;
      align-items: center;
  }
  
  .logo img {
-     height: 100%;
+     width: 60px;
+     height: 60px;
  }
  /* --------------------------------------------------- BARRE NAV  */
  
@@ -53,15 +55,16 @@
  
  .btnProfil {
      display: flex;
-     height: 80%;
-     width: 80%;
+     height: 40px;
+     width: 40px;
      align-items: center;
      justify-content: center;
  }
  
  .btnProfil img {
      display: block;
-     width: 40%;
+     width: 20px;
+     height: 20px;
  }
  
  .btnProfil:hover {

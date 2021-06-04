@@ -126,6 +126,7 @@ footer.pageFooter {
 }
 
 footer.pageFooter img.skyline {
+    width: 100vw;
     margin-bottom: -10px;
     filter: invert(17%) sepia(7%) saturate(1137%) hue-rotate(169deg) brightness(90%) contrast(92%);
 }
@@ -154,5 +155,7 @@ footer.pageFooter .footerLink .reseaux ul {
 }
 
 footer.pageFooter .footerLink .reseaux ul img {
+    width: 60px;
+    height: 60px;
     padding: 20%;
 }

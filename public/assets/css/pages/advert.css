@@ -20,7 +20,7 @@
 }
 
 
-/* -------------------------------------- SHOW ------------------------------- 
+/* -------------------------------------- SHOW ------------------------------- */
 
 .advertShow {
     height: 90vh;
@@ -41,10 +41,10 @@
 
 .advertShow .rate span {
     font-size: .8rem;
-}*/
+}
 
 
-/* Advert Container 
+/* Advert Container */
 
 .advertShow .advertContainer {
     display: flex;
@@ -70,10 +70,9 @@
     height: 2px;
     background-color: var(--light-blue);
 }
-*/
 
 
-/* Review Container 
+/* Review Container */
 
 .reviewsContainer {
     padding: 2% 5%;
@@ -105,58 +104,4 @@
 
 .reviewsContainer .reviews .comment {
     font-size: 1.2rem;
-}*/
-
-
-/* ANTOINE CSS */
-
-.advert .helper,
-.advert .description,
-.advert .action {
-    text-align: center;
-}
-
-.advert .title {
-    margin-top: 10%;
-}
-
-.advert .description {
-    margin-top: 2%;
-}
-
-.advert .action {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 3%;
-    margin-top: 2%;
-}
-
-.advert .message {
-    position: relative;
-    margin-left: 20px;
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #A8DDFD;
-    width: 30%;
-    text-align: left;
-    font: 400 .9em 'Open Sans', sans-serif;
-    border: 1px solid #97C6E3;
-    border-radius: 10px;
-}
-
-.advert .avatar {
-    border-radius: 100%;
-    height: 240px;
-    width: 240px;
-    margin-bottom: 2%;
-    margin-top: 2%;
-}
-
-.btnAsk {
-    text-align: center;
-}
-
-.btnAsk span {
-    color: var(--blue-light);
-    padding: 10px;
 }

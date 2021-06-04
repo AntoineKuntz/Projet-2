@@ -15,7 +15,7 @@
 
 .profilDetails .card {
     opacity: 0;
-    transition: all .3s .1s linear;
+    transition: opacity .3s .1s linear;
 }
 
 .profilDetails.active .card {
