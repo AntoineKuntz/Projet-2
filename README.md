@@ -1,6 +1,6 @@
 # StrasHelp
 
-Réalisation d'une plateforme d'échange de service entre particuliers.
+Réalisation d'une plateforme d'échanges de services entre particuliers.
 
 => Espace d'inscription - Connection.
 => Espace Administration.
