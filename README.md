@@ -14,4 +14,6 @@ Nous avons utilisé une structure MVC ainsi que la méthode agile SCRUM - PHP - 
 
 J’ai contribué à la réalisation des UserStories  Advert , AdvertHelp, Disponibility.
 
+Un fichier sql est joint ci-dessous a importer dans votre base de données.
+
 ce projet a était réaliser en Avril-Mai 2021.
