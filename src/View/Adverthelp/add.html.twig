@@ -1,0 +1,30 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheet %}        
+        <link rel="stylesheet" href="/assets/css/pages/advertHelp.css">
+        <link rel="stylesheet" href="/assets/css/components/form.css">
+{% endblock %}
+
+{% block content %}
+    <div class="advertHelpAdd wrapper">
+        
+        <div class="helpInfos">
+            <div>
+                <h2>{{advert.title}}</h2>
+                <p class="dispo">Disponibilité : {{disponibility.timeTable}}</p>
+            </div>
+            
+            <p class="description"> "{{advert.description}}"</p>
+            
+            <div class="avatar">
+                <img src="/assets/images/membres/avatars/{{user.avatar}}" alt="photo profil">
+                <h3>{{user.lastName}} {{user.firstName}}</h3>
+            </div>
+            
+        </div>
+
+        <div class="message">
+            {% include 'Adverthelp/_form.html.twig' %}
+        </div>
+    </div>
+{% endblock %}
