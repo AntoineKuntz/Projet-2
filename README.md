@@ -14,6 +14,9 @@ Nous avons utilisé une structure MVC ainsi que la méthode agile SCRUM - PHP - 
 
 J’ai contribué à la réalisation des UserStories  Advert , AdvertHelp, Disponibility.
 
-Un fichier sql est joint ci-dessous a importer dans votre base de données.
+- pour visualiser le projet merci  d'installer composer.
+- créer ensuite dans config un fichier db.php a compléter sur le modéle du fichier db.php.dist.
+Un fichier sql est joint ci-dessous pour que vous l'importiez dans votre base de données.
+
 
 ce projet a était réaliser en Avril-Mai 2021.
